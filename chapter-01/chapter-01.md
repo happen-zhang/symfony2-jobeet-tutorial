@@ -183,7 +183,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 
 重启Apache，在浏览器中输入<http://jobeet.local/app_dev.php>，你将会看到下面这个页面：
 
-![](imgs/01-02.png)
+![](imgs/01-02.jpg)
 
 ## Symfony2控制台 ##
 
