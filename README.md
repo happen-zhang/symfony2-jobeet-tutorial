@@ -16,11 +16,11 @@
 
 原文地址：<http://www.intelligentbee.com/blog/2013/08/07/symfony2-jobeet-day-1-starting-up-the-project/>
 
-Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrine>（**但这个教程基于1..x**）
+Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrine>（**但这个教程基于1.x**）
 
 # 为什么我要翻译这个教程 #
 
-我学习PHP也是有段时间了，接触过的PHP开发框架也就少数几个,有ThinkPHP、CakePHP等，而且它们大都很简单，开发效率也挺高的。早之前就听过了Symfony2，但是一直没想去了解它。有一天心血来潮，就Google了一些资源，于是就发现了这一些列不错的教程。教程中的内容和《Ruby on Rails Tutorial》差不多，都是以一个真是的案例来给大家讲解框架的使用，其中有教你怎样使用Symfony2进行开发，怎么样进行测试，怎么编写命令行任务等等。又鉴于国内关于Symfony2的资料稀缺，我任务这份资料可以说是很珍贵的。所以，我试着翻译（虽然并不是很难），目的是想让更多的小伙伴能见识一下Symfony2的强大，PHP的强大。
+我学习PHP也是有段时间了，接触过的PHP开发框架也就少数几个,有ThinkPHP、CakePHP等，而且它们大都很简单，开发效率也挺高的。早之前就听过了Symfony2，但是一直没想去了解它。有一天心血来潮，就Google了一些资源，于是就发现了这一些列不错的教程。教程中的内容和《Ruby on Rails Tutorial》差不多，都是以一个真是的案例来给大家讲解框架的使用，其中有教你怎样使用Symfony2进行开发，怎么样进行测试，怎么编写命令行任务等等。又鉴于国内关于Symfony2的资料稀缺，我认为这份资料可以说是很珍贵的。所以，我试着翻译（虽然并不是很难），目的是想让更多的小伙伴能见识一下Symfony2的强大，PHP的强大。
 
 # 从何入手 #
 
@@ -39,7 +39,7 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
 * [第九天：功能测试]()
 * [第十天：表单]()
 * [第十一天：对你的表单进行测试]()
-* [第十二天：后天管理工具包—Sonata Admin]()
+* [第十二天：后台管理工具包—Sonata Admin]()
 * [第十三天：实现程序的安全性]()
 * [第十四天：完成订阅功能]()
 * [第十五天：为你的应用提供接口]()
