@@ -73,7 +73,7 @@ affiliate能够通过他的affiliate token来调用API进行检索当前的职�
 
 ### Story B1：管理员配置网站 ###
 
-管理员能够编辑分类
+管理员能够编辑分类。
 
 ### Story B2：管理员管理职位 ###
 
