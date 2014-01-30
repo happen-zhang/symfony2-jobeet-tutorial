@@ -2,7 +2,7 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-假若你现在极其渴望打开你的文本编辑器来开始写`PHP`代码，那么今天就满足你的心愿，我们会开始做一些开发了。我们会定义`Jobeet`中使用到的模型，并使用`ORM`来和数据库交互，并且还会创建应用的第一个模块（module）。由于`Symfony`已经为我们做了很多工作，所以我们不用写太多的PHP代码就能拥有一个功能齐全的模块。
+假若你现在极其渴望打开你的文本编辑器来开始写`PHP`代码，那么今天就满足你的心愿，我们会开始做一些开发了。我们会定义`Jobeet`中使用到的模型，并使用`ORM`来和数据库交互，并且还会创建应用的第一个模块（module）。由于`Symfony`已经为我们做了很多工作，所以我们不用写太多的`PHP`代码就能拥有一个功能齐全的模块。
 
 ## 关系模型 ##
 
@@ -227,7 +227,7 @@ Ibw\JobeetBundle\Entity\Affiliate:
 
 ### 1、添加下面的代码到`composer.json`中的`require`区块中 ###
 
-```JSON
+```Javascript
 // composer.json
 // ...
     "require": {
