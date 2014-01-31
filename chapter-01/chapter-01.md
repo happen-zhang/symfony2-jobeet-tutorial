@@ -16,7 +16,7 @@
 
 首先，你需要去检查一下你的系统上是否能够友好地支持Web开发的环境。我们将会使在`VMware`虚拟机上使用`Ubuntu 12.04 LTS Server`进行开发。然后你的系统上需要有Web服务器（例如`Apache`）、数据库（`Mysql`）和`PHP`（版本不低于5.3.3），这些要求都是最基本的。
 
-### 1、安装`Apache`作为你的服务器 ###
+### 1、安装Apache作为你的服务器 ###
 
     sudo apt-get install apache2
 
@@ -24,23 +24,23 @@
 
     sudo a2enmod rewrite
 
-### 2、安装`Mysql` ###
+### 2、安装Mysql ###
 
     sudo apt-get install mysql-server mysql-client
 
-### 3、安装`PHP` ###
+### 3、安装PHP ###
 
     sudo apt-get install php5 libapache2-mod-php5 php5-mysql
 
-### 4、安装`Intl`扩展 ###
+### 4、安装Intl扩展 ###
 
     sudo apt-get install php5-intl
 
-### 5、重启`Apache` ###
+### 5、重启Apache ###
 
     sudo service apache2 restart
 
-## 下载和安装`Symfony2.3.2` ##
+## 下载和安装Symfony2.3.2 ##
 
 你现在需要做的事情是需要在服务器下准备一个目录来存放Jobeet项目。那我们就把那个目录命名为`jobeet`：`/var/www/jobeet`。
 
@@ -48,7 +48,7 @@
 
 现在目录已经准备好了，那么我们要在里面放些什么呢？点击<http://symfony.com/download>，选择 `Symfony Standard 2.3.2 without vendors（2.3.2标准版）`并进行下载。现在，把下载到的文件解压到刚才准备好的`jobeet目录`中。
 
-## 更新`Vendors` ##
+## 更新Vendors ##
 
 在这一步中，你将会更新`Symfony`，你会使用它来开始开发你的应用。一个`Symfony`项目通常需要依赖很多的扩展库，这些扩展库可以通过一个叫`Composer`的库来下载，并把下载的扩展库存放在`vendor/`目录下。
 
@@ -153,7 +153,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 
 当你运行`config.php`后，`Symfony`可能会需要你满足要求。完成下面这些配置能够帮助你消除`”warnings“`。
 
-### 1、为`app/cache和app/logs`修改权限 ###
+### 1、为app/cache和app/logs修改权限 ###
 
     sudo chmod -R 777 app/cache
     sudo chmod -R 777 app/logs
@@ -163,7 +163,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 
 >     sudo apt-get install acl
 
-### 2、设置`php.ini`中的`date.timezone`配置 ###
+### 2、设置php.ini中的date.timezone配置 ###
 
     date.timezone = Europe/Bucharest # date.timezone = Asia/Shanghai
 
@@ -171,12 +171,12 @@ require_once __DIR__.'/../app/AppKernel.php';
 
 在`php.ini`文件中的`[data]`部分找到`date.timezone`配置项，然后删除前面的`“;”`。
 
-### 3、设置`php.ini`中的`short_open_tag`为`false` ###
+### 3、设置php.ini中的short\_open\_tag为false ###
 
     short_open_tag
         Default Value: Off
 
-### 4、安装`PHP`加速器（推荐使用`APC`） ###
+### 4、安装PHP加速器（推荐使用APC） ###
 
     sudo apt-get install php-apc
     sudo service apache2 restart
@@ -185,7 +185,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 
 ![](imgs/01-02.jpg)
 
-## `Symfony2`控制台 ##
+## Symfony2控制台 ##
 
 `Symfony2`自带了一个命令行工具，你可以使用它来完成不同任务。
 
@@ -193,9 +193,9 @@ require_once __DIR__.'/../app/AppKernel.php';
 
     php app/console list
 
-## 创建应用程序的`bundle` ##
+## 创建应用程序的bundle ##
 
-### `bundle`（包）是什么 ###
+### bundle（包）是什么 ###
 
 `bundle`十分类似于其他应用程序中的插件（`plugin`），但`bundle`比它们更好。在`Symfony2.3.2`中，所有的一切都是`Bundle`，包括核心的框架功能，还有你的应用中的代码。
 
@@ -204,7 +204,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 > Tips：一个Bundle能够在任何地方使用，只要它能够被自动加载（`app/autoload.php`）。
 > 在里可以了解更多关于`bundle系统`：<http://symfony.com/doc/current/book/page_creation.html#the-bundle-system>
 
-### 创建基本的`bundle框架` ###
+### 创建基本的bundle框架 ###
 
 执行下面的命令启动`Symfony`的`bundle`生成器：
 
@@ -231,11 +231,11 @@ require_once __DIR__.'/../app/AppKernel.php';
 
 `Symfony2.3.2`标准版中自带了一个完整的`demo`，它叫做`AcmeDemoBundle`。它是一个很好的参照样例，但你最终还是需要删除它的。
 
-### 1、输入下面的命令删除`Acme目录` ###
+### 1、输入下面的命令删除Acme目录 ###
 
     rm -rf /var/www/jobeet/src/Acme
 
-### 2、修改`/var/www/jobeet/app/AppKernel.php`中 ###
+### 2、修改/var/www/jobeet/app/AppKernel.php中 ###
 
 ```PHP
 // ...
@@ -245,7 +245,7 @@ $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
 // ...
 ```
 
-### 3、修改`app/config/routing_dev.yml` ###
+### 3、修改app/config/routing_dev.yml ###
 
 ```Yml
 # ... 
@@ -255,7 +255,7 @@ _acme_demo:
     resource: "@AcmeDemoBundle/Resources/config/routing.yml"
 ```
 
-### 4、清除`cache` ###
+### 4、清除cache ###
 
     php app/console cache:clear --env=prod
     php app/console cache:clear --env=dev
