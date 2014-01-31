@@ -225,7 +225,7 @@ Ibw\JobeetBundle\Entity\Affiliate:
 
 为了让我们的数据库中能有些`初始数据`，我们使用[DoctrineFixturesBundle](http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html)。我们来按下面的步骤来安装`DoctrineFixturesBundle`：
 
-### 1、添加下面的代码到`composer.json`中的`require`区块中 ###
+### 1、添加下面的代码到composer.json中的require区块中 ###
 
 ```Javascript
 // composer.json
@@ -239,11 +239,11 @@ Ibw\JobeetBundle\Entity\Affiliate:
 // ...
 ```
 
-### 2、更新`vender`库 ###
+### 2、更新vender库 ###
 
     php composer.phar update
 
-### 3、在`app/AppKernel.php`中注册`DoctrineFixturesBundle` ###
+### 3、在app/AppKernel.php中注册DoctrineFixturesBundle ###
 
 ```PHP
 // app/AppKernel.php
