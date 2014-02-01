@@ -545,6 +545,8 @@ $entity = $em->getRepository('IbwJobeetBundle:Job')->getActiveJob($id);
 
 现在你去访问一个过时的`job`页面，你会被转到`404页面`：
 
+![](imgs/06-03.png)
+
 好了，今天就到这吧。我们明天会开始实现`category`页面。
 
 # 许可证 #
