@@ -2,11 +2,11 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-假若你现在极其渴望打开你的文本编辑器来开始写`PHP`代码，那么今天就满足你的心愿，我们会开始做一些开发了。我们会定义`Jobeet`中使用到的模型，并使用`ORM`来和数据库交互，并且还会创建应用的第一个模块（module）。由于`Symfony`已经为我们做了很多工作，所以我们不用写太多的`PHP`代码就能拥有一个功能齐全的模块。
+假若你现在极其渴望打开你的文本编辑器来开始写PHP代码，那么今天就满足你的心愿，我们会开始做一些开发了。我们会定义Jobeet中使用到的模型，并使用*ORM*来和数据库交互，并且还会创建应用的第一个模块（module）。由于Symfony已经为我们做了很多工作，所以我们不用写太多的PHP代码就能拥有一个功能齐全的模块。
 
 ## 关系模型 ##
 
-在[第二天](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-02/chapter-02.md)中的用户stories描述了`Jobeet`项目中的主要对象：职位（jobs），affiliates和分类（categories）。下面是它们之间的实体关系图：
+在[第二天](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-02/chapter-02.md)中的用户stories描述了Jobeet项目中的主要对象：职位（jobs），affiliates和分类（categories）。下面是它们之间的实体关系图：
 
 ![](imgs/03-01.png)
 
@@ -14,27 +14,27 @@
 
 ## 数据库 ##
 
-为了让职位（jobs），affiliate和分类（categories）能存放在数据库里，`Symfony2.3.2`使用的[ORM](http://www.doctrine-project.org/projects/orm.html)工具是[Doctrine](http://www.doctrine-project.org/projects/orm.html)。为了能够连接数据库，我们需要编辑`app/config/parameters.yml`文件（这里使用的是MySQL）：
+为了让职位（jobs），affiliate和分类（categories）能存放在数据库里，Symfony2.3.2使用的[ORM](http://www.doctrine-project.org/projects/orm.html)工具是[Doctrine](http://www.doctrine-project.org/projects/orm.html)。为了能够连接数据库，我们需要编辑`app/config/parameters.yml`文件（这里使用的是MySQL）：
 
 ```Yml
 # app/config/parameters.yml
 parameters:
-    database\_driver: pdo\_mysql
-    database\_host: localhost
-    database\_port: null
-    database\_name: jobeet
-    database\_user: root
-    database\_password: password
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: null
+    database_name: jobeet
+    database_user: root
+    database_password: password
     # ...
 ```
 
-现在你能让`Doctrine`连接到你的数据库了。你能通过在终端输入下面的命令来让`Doctrine`帮助你生成数据库：
+现在你能让*Doctrine*连接到你的数据库了。你能通过在终端输入下面的命令来让*Doctrine*帮助你生成数据库：
 
     php app/console doctrine:database:create
 
 ## 模式 ##
 
-为了能让`Doctrine`能够了解我们的对象，我们需要创建“元数据”文件来描述对象在数据库中的字段域。我们先在`src/Ibw/JobeetBundle/Resources/config`目录下创建一个`doctrine`目录。`doctribe`目录会包含三个文件：`Category.orm.yml`，`Job.orm.yml`和`Affiliate.orm.yml`。
+为了能让*Doctrine*能够了解我们的对象，我们需要创建“元数据”文件来描述对象在数据库中的字段域。我们先在`src/Ibw/JobeetBundle/Resources/config`目录下创建一个`doctrine`目录。`doctribe`目录会包含三个文件：`Category.orm.yml`，`Job.orm.yml`和`Affiliate.orm.yml`。
 
 ```Yml
 # src/Ibw/JobeetBundle/Resources/config/doctrine/Category.orm.yml
@@ -169,11 +169,11 @@ Ibw\JobeetBundle\Entity\Affiliate:
 
 ## ORM ##
 
-现在在终端输入下面的命令，`Doctrine`能够生成我们定义好的对应的类了：
+现在在终端输入下面的命令，*Doctrine*能够生成我们定义好的对应的类了：
 
     php app/console doctrine:generate:entities IbwJobeetBundle
 
-现在你可以在`src/Ibw/JobeetBundle`目录下看到一个`Entity`目录，在`Entity`目录中你可以看到新生成的文件：`Category.php`，`Job.php`和`Affiliate.php`。打开`Job.php`文件，把`created_at`和`updated_at`的值设置如下：
+现在你可以在`src/Ibw/JobeetBundle`目录下看到一个*Entity*目录，在*Entity*目录中你可以看到新生成的文件：`Category.php`，`Job.php`和`Affiliate.php`。打开`Job.php`文件，把`created_at`和`updated_at`的值设置如下：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Job.php
@@ -198,7 +198,7 @@ Ibw\JobeetBundle\Entity\Affiliate:
     }
 ```
 
-对`Affiliate`类中的`created_at`进行同样的修改：
+对*Affiliate*类中的`created_at`进行同样的修改：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Affiliate.php
@@ -215,15 +215,15 @@ Ibw\JobeetBundle\Entity\Affiliate:
 // ...
 ```
 
-上面做的修改会让`Doctrine`在保存对象或者更新对象的时候更新`created_at`和`updated_at`的值。这些`Doctrine`行为被定义在`Affiliate.orm.yml`和`Job.orm.yml`文件的下面。接下来我们让Doctrine帮助我们生成数据表，输入下面的命令：
+上面做的修改会让*Doctrine*在保存对象或者更新对象的时候更新`created_at`和`updated_at`的值。这些*Doctrine*行为被定义在`Affiliate.orm.yml`和`Job.orm.yml`文件的下面。接下来我们让Doctrine帮助我们生成数据表，输入下面的命令：
 
     php app/console doctrine:schema:update --force
 
 > 这个任务（task）只能在开发环境（development）中使用。生产环境（production）中更新你的数据库，看以查看[Doctrine migrations](http://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html)。
 
-现在数据表已经创建好了，但数据表中还没有任何的数据。对于一个Web应用，它们往往具有三类数据：`初始数据`（应用运行所需要的数据，在`Jobeet`中我们需要初始用的分类（categories）数据和管理员（admin）数据），`测试数据`（应用程序测试用的数据）和`用户数据`（用户在使用应用的时候创建的）
+现在数据表已经创建好了，但数据表中还没有任何的数据。对于一个Web应用，它们往往具有三类数据：*初始数据*（应用运行所需要的数据，在Jobeet中我们需要初始用的分类（categories）数据和管理员（admin）数据），*测试数据*（应用程序测试用的数据）和*用户数据*（用户在使用应用的时候创建的）
 
-为了让我们的数据库中能有些`初始数据`，我们使用[DoctrineFixturesBundle](http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html)。我们来按下面的步骤来安装`DoctrineFixturesBundle`：
+为了让我们的数据库中能有些*初始数据*，我们使用[DoctrineFixturesBundle](http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html)。我们来按下面的步骤来安装*DoctrineFixturesBundle*：
 
 ### 1、添加下面的代码到composer.json中的require区块中 ###
 
@@ -389,7 +389,7 @@ IbwJobeetBundle_job:
 # ...
 ```
 
-同时我们需要在`Category`类中添加`__toString()`方法，这个能让`job`表单能够下拉选择类别（category）：
+同时我们需要在*Category*类中添加`__toString()`方法，这个能让*job*表单能够下拉选择类别（category）：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Category.php
@@ -408,13 +408,13 @@ public function __toString()
     php app/console cache:clear --env=dev
     php app/console cache:clear --env=prod
 
-现在你可以在浏览器中测试一下了：`http://jobeet.local/job/`，或者在开发环境中的`http://jobeet.local/app_dev.php/job/`。
+现在你可以在浏览器中测试一下了：*http://jobeet.local/job/*，或者在开发环境中的*http://jobeet.local/app_dev.php/job/*。
 
 ![](imgs/03-02.png)
 
-现在你能够添加或者编辑职位（jobs）了。你可以试着让必填项留空或者输入无效的数据。是的，你可以看到`Symfony`已经创建了基本的验证规则，这些都有是按照数据表来定义的。
+现在你能够添加或者编辑职位（jobs）了。你可以试着让必填项留空或者输入无效的数据。是的，你可以看到Symfony已经创建了基本的验证规则，这些都有是按照数据表来定义的。
 
-今天就这些了。我们勉强地写了一些`PHP`代码，同时也有了一个职位（job）模型和职位模块（module）。明天我们就来熟悉一下控制器（controller）和视图（view）吧，明天见。
+今天就这些了。我们勉强地写了一些PHP代码，同时也有了一个职位（job）模型和职位模块（module）。明天我们就来熟悉一下控制器（controller）和视图（view）吧，明天见。
 
 # 许可证 #
 
