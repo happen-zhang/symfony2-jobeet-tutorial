@@ -26,7 +26,7 @@ class JobController extends Controller
 }
 ```
 
-一个有效的*job*意味着这个*job*发布的日期不超过30天。*$entities = $em->getRepository('IbwJobeetBundle')->findAll()*这行代码是从数据库中取出所有的*job*数据，因为我们没有指定任何的查询条件。
+一个有效的*job*意味着这个*job*发布的日期不超过30天。`$entities = $em->getRepository('IbwJobeetBundle')->findAll()`这行代码是从数据库中取出所有的*job*数据，因为我们没有指定任何的查询条件。
 
 我们来做些修改，使它只取出有效的（active）的*job*：
 
