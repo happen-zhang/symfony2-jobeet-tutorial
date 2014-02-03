@@ -133,7 +133,7 @@ Symfony2中没有默认的布局，我们需要来创建一个布局来装饰其
 
 ## Stylesheets，Javascripts和图片 ##
 
-我们的教程不是教你Web设计，这里已经准备好了所有需要使用到的资源。[点击这里下载图片](http://www.intelligentbee.com/blog/downloads/jobeet-images.zip)，然后把这些`图片`放在`src/Ibw/JobeetBundle/Resources/public/images/`目录下，[点击这里下载css文件](http://www.intelligentbee.com/blog/downloads/jobeet-css.zip)，然后把`css文件`放在`src/Ibw/JobeetBundle/Resources/public/css/`目录下。
+我们的教程不是教你Web设计，这里已经准备好了所有需要使用到的资源。[点击这里下载图片](http://www.intelligentbee.com/blog/downloads/jobeet-images.zip)，然后把这些图片放在`src/Ibw/JobeetBundle/Resources/public/images/`目录下，[点击这里下载css文件](http://www.intelligentbee.com/blog/downloads/jobeet-css.zip)，然后把css文件放在`src/Ibw/JobeetBundle/Resources/public/css/`目录下。
 
 现在运行下面的命令：
 
@@ -141,7 +141,7 @@ Symfony2中没有默认的布局，我们需要来创建一个布局来装饰其
 
 上面的命令是告诉Symfony把*css*和*图片*资源作为公用的。
 
-在css文件夹中，我们可以看到有四个文件：`admin.css`，`job.css`，`jobs.css`和`main.css`。`main.css`需要被所有的`Jobeet`页面使用，所以我们把它放在布局（layout）中的`stylesheet twig block`里。剩下的其它三个`css`文件我们在需要用到的页面才加入。
+在css文件夹中，我们可以看到有四个文件：`admin.css`，`job.css`，`jobs.css`和`main.css`。`main.css`需要被所有的`Jobeet`页面使用，所以我们把它放在布局（layout）中的`stylesheet twig block`里。剩下的其它三个css文件我们在需要用到的页面才加入。
 
 为了能够在模板中加入新的css文件，我们需要重写`stylesheet block`，但需要先调用父block，这样才不会把`main.css`给覆盖掉（看代码就清晰了）。
 
