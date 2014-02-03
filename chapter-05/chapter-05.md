@@ -4,17 +4,17 @@
 
 ## URLs ##
 
-如果你在Jobeet首页点击任意一个*job*，你会发现这些URL看起来会是这样的：*/job/1/show*。如果你曾经使用PHP开发过网站，你可能更加熟悉这样的URL：*/job.php?id=1*。那么Symfony是怎么做到的呢？Symfony是如何根据URL来决定调用哪个*action*的呢？为什么`showAction($id)`中的`$id`的值就是检索*job*的id呢？这些问题我们会在这里一一解答。你在`src/Ibw/JobeetBundle/Resources/views/Job/index.html.twig`模板中可以看到如下代码：
+如果你在Jobeet首页点击任意一个*job*，你会发现这些URL看起来会是这样的：*/job/1/show*。如果你曾经使用PHP开发过网站，你可能更加熟悉这样的URL：*/job.php?id=1*。那么Symfony是怎么做到的呢？Symfony是如何根据URL来决定调用哪个*action*的呢？为什么*showAction($id)*中的*$id*的值就是检索*job*的id呢？这些问题我们会在这里一一解答。你在*src/Ibw/JobeetBundle/Resources/views/Job/index.html.twig*模板中可以看到如下代码：
 
 ```HTML
 {{ path('ibw_job_show', { 'id': entity.id }) }}
 ```
 
-这里使用了视图助手函数（template helper function）`path()`生成带有id值为1的*job*URL。`ibw_job_show`是路由使用的名称（具名路由），你可以在下面的内容中看到它们的定义。
+这里使用了视图助手函数（template helper function）`path()`生成带有id值为1的*job*URL。*ibw\_job\_show*是路由使用的名称（具名路由），你可以在下面的内容中看到它们的定义。
 
 ## 路由配置 ##
 
-在Symfony2中，路由通常是在`app/config/routing.yml`中进行配置的。这里导入（import）了指定bundle中的路由配置。在我们的教程中，文件`src/Ibw/JobeetBundle/Resources/config/routing.yml`就被导入其中：
+在Symfony2中，路由通常是在*app/config/routing.yml*中进行配置的。这里导入（import）了指定bundle中的路由配置。在我们的教程中，文件*src/Ibw/JobeetBundle/Resources/config/routing.yml*就被导入其中：
 
 ```YAML
 # app/config/routing.yml
@@ -23,7 +23,7 @@ ibw_jobeet:
     prefix:   /
 ```
 
-现在，如果你可以打开*JobeetBundle*中的`routing.yml`文件，你可以看到它又导入了另外一个路由文件`src/Ibw/JobeetBundle/Resources/config/routing/job.yml`。在`routing.yml`中定义了两个路由，一个是URL样式为`/hello/{name}`的`ibw_jobeet_homepage`路由，另外一个则是定义给`JobController`的路由：
+现在，如果你可以打开*JobeetBundle*中的*routing.yml*文件，你可以看到它又导入了另外一个路由文件*src/Ibw/JobeetBundle/Resources/config/routing/job.yml*。在*routing.yml*中定义了两个路由，一个是URL样式为*/hello/{name}*的*ibw_jobeet_homepage*路由，另外一个则是定义给*JobController*的路由：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing.yml
@@ -70,17 +70,17 @@ ibw_job_delete:
     requirements: { _method: post|delete }
 ```
 
-我们来仔细看看`ibw_job_show`路由。`ibw_job_show`路由定义的模式可以匹配*/\*/show*的URL，这里的通配符\*代表的是id。在URL*/1/show*中，id变量的值为1，你可以在控制器中使用id变量的值。`_controller`是一个特殊的键（key），它告诉Symfony当URL匹配的时候要调用哪个*Controller*的*Action*，在这里的例子中应该调用的是`IbwJobeetBundle`中的`JobController`里的`showAction()`。
+我们来仔细看看*ibw\_job\_show*路由。*ibw\_job\_show*路由定义的模式可以匹配*/\*/show*的URL，这里的通配符\*代表的是id。在URL*/1/show*中，id变量的值为1，你可以在控制器中使用id变量的值。*_controller*是一个特殊的键（key），它告诉Symfony当URL匹配的时候要调用哪个*Controller*的*Action*，在这里的例子中应该调用的是*IbwJobeetBundle*中的*JobController*里的*showAction()*。
 
-路由中的参数（比如`{id}`）是十分重要的，因为它们可以被*action*方法作为参数使用。
+路由中的参数（比如*{id}*）是十分重要的，因为它们可以被*action*方法作为参数使用。
 
 ## 在开发（development）环境下的路由 ##
 
-在开发环境下加载的路由文件是`app/config/routing_dev.yml`，这个文件包含了*Web Debug Toolbar*中需要用到的路由，而且在文件的末尾我们还可以看到`_main`中的路由是`routing.yml`。
+在开发环境下加载的路由文件是*app/config/routing_dev.yml*，这个文件包含了*Web Debug Toolbar*中需要用到的路由，而且在文件的末尾我们还可以看到*_main*中的路由是*routing.yml*。
 
 ## 自定义路由 ##
 
-现在当你在浏览器中访问*/*URL的时候，你会得到一个*404页面*，那是因为*/*没有匹配到任何的已定义路由。`ibw_jobeet_homepage`路由匹配*/hello/jobeet*URL，然后调用`DefaultController`的`indexAction()`。我们来改变它来匹配*/*URL，然后调用`JobController`的`indexAction()`。修改的代码如下：
+现在当你在浏览器中访问*/*URL的时候，你会得到一个*404页面*，那是因为*/*没有匹配到任何的已定义路由。*ibw\_jobeet\_homepage*路由匹配*/hello/jobeet*URL，然后调用*DefaultController*的*indexAction()*。我们来改变它来匹配*/*URL，然后调用*JobController*的*indexAction()*。修改的代码如下：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing.yml
@@ -90,7 +90,7 @@ ibw_jobeet_homepage:
     defaults: { _controller: IbwJobeetBundle:Job:index }
 ```
 
-现在先去清除缓存（cache），然后你就能在浏览器中通过<http://jobeet.local>访问*Job*首页了。现在我们可以把Jobeet布局（layout）中logo的链接改成`ibw_jobeet_homepage`路由了：
+现在先去清除缓存（cache），然后你就能在浏览器中通过<http://jobeet.local>访问*Job*首页了。现在我们可以把Jobeet布局（layout）中logo的链接改成*ibw\_jobeet\_homepage*路由了：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/layout.html.twig -->
@@ -111,7 +111,7 @@ ibw_jobeet_homepage:
 
     /job/{company}/{location}/{id}/{position}
 
-编辑`job.yml`文件中的`ibw_job_show`路由：
+编辑*job.yml*文件中的*ibw\_job\_show*路由：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing/job.yml
@@ -137,7 +137,7 @@ ibw_job_show:
 
     http://jobeet.local/app_dev.php/job/Sensio Labs/Paris,France/1/Web Developer
 
-我们需要把URL中的所有非*ASCII*列值转化成一个*-*。打开`Job.php`文件，在类中添加下面的方法：
+我们需要把URL中的所有非*ASCII*列值转化成一个*-*。打开*Job.php*文件，在类中添加下面的方法：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Job.php
@@ -165,9 +165,9 @@ class Job
 }
 ```
 
-你必须把`use`语句（你可以查看PHP中怎么使用*命名空间*）放在类定义之前。
+你必须把*use*语句（你可以查看PHP中怎么使用*命名空间*）放在类定义之前。
 
-然后我们创建`src/Ibw/JobeetBundle/Utils/Jobeet.php`文件，并添加一个`slugify`方法：
+然后我们创建*src/Ibw/JobeetBundle/Utils/Jobeet.php*文件，并添加一个*slugify*方法：
 
 ```PHP
 // src/Ibw/JobeetBundle/Utils/Jobeet.php
@@ -188,7 +188,7 @@ class Jobeet
 }
 ```
 
-我们已经定义了三个“虚拟的（virtual）”访问接口：`getCompanySlug()`，`getPositionSlug()`和`getLocationSlug()`，它们使用`slugify()`方法返回适当的列值。现在我们来替换在之前模板中使用的方法：
+我们已经定义了三个“虚拟的（virtual）”访问接口：*getCompanySlug()*，*getPositionSlug()*和*getLocationSlug()*，它们使用*slugify()*方法返回适当的列值。现在我们来替换在之前模板中使用的方法：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/Job/index.html.twig -->
@@ -219,7 +219,7 @@ ibw_job_show:
 
 ## 调试路由 ##
 
-当你添加一个自定义的路由之后，如果能通过可视化来得到更多路由的信息，我们相信这一定会对你很有帮助的。一个能够查看你应用的所有路由的好办法是使用`route:debug`命令。在你的项目下运行下面的命令：
+当你添加一个自定义的路由之后，如果能通过可视化来得到更多路由的信息，我们相信这一定会对你很有帮助的。一个能够查看你应用的所有路由的好办法是使用*route:debug*命令。在你的项目下运行下面的命令：
 
     php app/console router:debug
 
