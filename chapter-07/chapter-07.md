@@ -137,7 +137,7 @@ public function countActiveJobs($category_id = null)
 
 现在你可以在浏览器中看到下面的结果：
 
-![](imgs/07-01.md)
+![](imgs/07-01.png)
 
 ## 创建CategoryController控制器 ##
 
