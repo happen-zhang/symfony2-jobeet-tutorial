@@ -42,7 +42,7 @@ Jobeet是一个发布求职和招聘信息的网站，它是开源的。在这�
 
 ## 下载和安装Symfony2.3.2 ##
 
-你现在需要做的事情是需要在服务器下准备一个目录来存放Jobeet项目。那我们就把那个目录命名为`jobeet：/var/www/jobeet`。
+你现在需要做的事情是需要在服务器下准备一个目录来存放Jobeet项目。那我们就把那个目录命名为*jobeet：/var/www/jobeet*。
 
     mkdir /var/www/jobeet
 
@@ -66,11 +66,11 @@ Jobeet是一个发布求职和招聘信息的网站，它是开源的。在这�
 
 ## 网站服务器配置 ##
 
-一个良好的Web实践是，我们只把浏览器需要访问到的文件放在网站的根目录下，比如*css文件*，*js文件*，*图片*。在Symfony项目中，通常推荐把这些文件放在项目中的`web/`子目录中。现在来配置你的项目，你需要创建一个*虚拟主机（virtual host）*，打开你终端，输入下面的命令：
+一个良好的Web实践是，我们只把浏览器需要访问到的文件放在网站的根目录下，比如*css文件*，*js文件*，*图片*。在Symfony项目中，通常推荐把这些文件放在项目中的*web/*子目录中。现在来配置你的项目，你需要创建一个*虚拟主机（virtual host）*，打开你终端，输入下面的命令：
 
     sudo nano /etc/apache2/sites-available/jobeet.local
 
-好了，我们创建了一个`jobeet.local`的文件。接下来，把下面的代码复制到`jobeet.local`中，然后按下`Control-O`，回车进行保存，然后`Control-X`退出编辑器。
+好了，我们创建了一个*jobeet.local*的文件。接下来，把下面的代码复制到*jobeet.local*中，然后按下*Control-O*，回车进行保存，然后*Control-X*退出编辑器。
 
     <VirtualHost *:80>
         ServerName jobeet.local
@@ -84,7 +84,7 @@ Jobeet是一个发布求职和招聘信息的网站，它是开源的。在这�
          </Directory>
     </VirtualHost>
 
-我们在Apache服务器中使用的`jobeet.local`本地域名需要被声明才能使用。如果你使用的*Linux*系统，那么你需要找到`/etc/hosts`文件。如果你使用的是*Windows*系统，你需要找到`c:\Windows\System32\drivers\etc\hosts`文件。把下面这行加入到`hosts`文件的末尾：
+我们在Apache服务器中使用的*jobeet.local*本地域名需要被声明才能使用。如果你使用的*Linux*系统，那么你需要找到*/etc/hosts*文件。如果你使用的是*Windows*系统，你需要找到*c:\Windows\System32\drivers\etc\hosts*文件。把下面这行加入到*hosts*文件的末尾：
 
     127.0.0.1 jobeet.local
 
@@ -101,7 +101,7 @@ Symfony有一个自带测试工具来帮助你检查你的开发环境配置是�
 
 ![](imgs/01-01.png)
 
-如果你不是在本地主机上运行`confoig.php`而是在远程的服务器上运行的话，那么你应该修改`web/config.php`文件，把下面这些限制外部访问的代码给注释掉：
+如果你不是在本地主机上运行*confoig.php*而是在远程的服务器上运行的话，那么你应该修改*web/config.php*文件，把下面这些限制外部访问的代码给注释掉：
 
 ```PHP
 if (!isset($_SERVER['HTTP_HOST'])) {
@@ -121,7 +121,7 @@ if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
 // ...
 ```
 
-在`web/app_dev.php`中做和上面相同的修改：
+在*web/app_dev.php*中做和上面相同的修改：
 
 ```PHP
 use Symfony\Component\HttpFoundation\Request;
@@ -151,7 +151,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 // ...
 ```
 
-当你运行`config.php`后，Symfony可能会需要你满足要求。完成下面这些配置能够帮助你消除*”warnings“*。
+当你运行*config.php*后，Symfony可能会需要你满足要求。完成下面这些配置能够帮助你消除*”warnings“*。
 
 ### 1、为app/cache和app/logs修改权限 ###
 
@@ -169,7 +169,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 
     sudo nano /etc/php5/apache2/php.ini
 
-在`php.ini`文件中的`[data]`部分找到`date.timezone`配置项，然后删除前面的*“;”*。
+在*php.ini*文件中的`[data]`部分找到`date.timezone`配置项，然后删除前面的`;`。
 
 ### 3、设置php.ini中的short\_open\_tag为false ###
 
@@ -201,7 +201,7 @@ bundle十分类似于其他应用程序中的插件（plugin），但bundle比�
 
 一个bundle就是实现一个功能的接口，它由许多文件组成，这些文件有组织地被放在一起，这就组成了一个Bundle（包）。
 
-> Tips：一个Bundle能够在任何地方使用，只要它能够被自动加载（`app/autoload.php`）。
+> Tips：一个Bundle能够在任何地方使用，只要它能够被自动加载（*app/autoload.php*）。
 > 在里可以了解更多关于*bundle系统*：<http://symfony.com/doc/current/book/page_creation.html#the-bundle-system>
 
 ### 创建基本的bundle框架 ###
@@ -225,11 +225,11 @@ bundle十分类似于其他应用程序中的插件（plugin），但bundle比�
     php app/console cache:clear --env=prod
     php app/console cache:clear --env=dev
 
-新生成的bundle可以在`src`目录下找到：`src/Ibw/JobeetBundle`。bundle生成器会生成一个`DefaultController`，在这个控制器中有一个`indexAction()`方法。你可以通过下面的URL访问：<http://jobeet.local/hello/jobeet>或者<http://jobeet.local/app_dev.php/hello/jobeet>
+新生成的bundle可以在*src/*目录下找到：*src/Ibw/JobeetBundle*。bundle生成器会生成一个*DefaultController*，在这个控制器中有一个*indexAction()*方法。你可以通过下面的URL访问：<http://jobeet.local/hello/jobeet>或者<http://jobeet.local/app_dev.php/hello/jobeet>
 
 ## 删除AcmeDemoBundle ##
 
-Symfony2.3.2标准版中自带了一个完整的demo，它叫做`AcmeDemoBundle`。它是一个很好的参照样例，但你最终还是需要删除它的。
+Symfony2.3.2标准版中自带了一个完整的demo，它叫做*AcmeDemoBundle*。它是一个很好的参照样例，但你最终还是需要删除它的。
 
 ### 1、输入下面的命令删除Acme目录 ###
 
@@ -262,7 +262,7 @@ _acme_demo:
 
 ## 环境 ##
 
-Symfony2.3.2拥有不同的环境。如果你去查看`web/`目录，你会发现有两个php文件：`app_dev.php`和`app.php`。这两个文件被叫做*“前端控制器”*，所有的请求都需要通过它们。`app.php`文件被用在*Production*环境，而`app_dev.php`则被用在*Development*环境。在*Development*环境下是十分方便的，因为它能够把所有程序中出现的的*errors*和*warnings*显示在调试栏（*Debug Toolbar*）上—开发者的最好的小伙伴。
+Symfony2.3.2拥有不同的环境。如果你去查看*web/*目录，你会发现有两个php文件：*app_dev.php*和*app.php*。这两个文件被叫做*“前端控制器”*，所有的请求都需要通过它们。*app.php*文件被用在*Production*环境，而*app_dev.php*则被用在*Development*环境。在*Development*环境下是十分方便的，因为它能够把所有程序中出现的的*errors*和*warnings*显示在调试栏（*Debug Toolbar*）上—开发者的最好的小伙伴。
 
 好了，今天就先到这。在下一天（章）中，我们将会给详细你讲解Jobeet都有哪些功能。
 
