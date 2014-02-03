@@ -10,7 +10,7 @@
 {{ path('ibw_job_show', { 'id': entity.id }) }}
 ```
 
-这里使用了视图助手函数（template helper function）`path()`生成带有id值为1的*job*URL。*ibw\_job\_show*是路由使用的名称（具名路由），你可以在下面的内容中看到它们的定义。
+这里使用了视图助手函数（template helper function）`path()`生成带有id值为1的*job* URL。*ibw\_job\_show*是路由使用的名称（具名路由），你可以在下面的内容中看到它们的定义。
 
 ## 路由配置 ##
 
@@ -70,7 +70,7 @@ ibw_job_delete:
     requirements: { _method: post|delete }
 ```
 
-我们来仔细看看*ibw\_job\_show*路由。*ibw\_job\_show*路由定义的模式可以匹配*/\*/show*的URL，这里的通配符\*代表的是id。在URL*/1/show*中，id变量的值为1，你可以在控制器中使用id变量的值。*_controller*是一个特殊的键（key），它告诉Symfony当URL匹配的时候要调用哪个*Controller*的*Action*，在这里的例子中应该调用的是*IbwJobeetBundle*中的*JobController*里的*showAction()*。
+我们来仔细看看*ibw\_job\_show*路由。*ibw\_job\_show*路由定义的模式可以匹配_/*/show_的URL，这里的通配符\*代表的是id。在URL _/1/show_中，id变量的值为1，你可以在控制器中使用id变量的值。*_controller*是一个特殊的键（key），它告诉Symfony当URL匹配的时候要调用哪个*Controller*的*Action*，在这里的例子中应该调用的是*IbwJobeetBundle*中的*JobController*里的*showAction()*。
 
 路由中的参数（比如*{id}*）是十分重要的，因为它们可以被*action*方法作为参数使用。
 
@@ -80,7 +80,7 @@ ibw_job_delete:
 
 ## 自定义路由 ##
 
-现在当你在浏览器中访问*/*URL的时候，你会得到一个*404页面*，那是因为*/*没有匹配到任何的已定义路由。*ibw\_jobeet\_homepage*路由匹配*/hello/jobeet*URL，然后调用*DefaultController*的*indexAction()*。我们来改变它来匹配*/*URL，然后调用*JobController*的*indexAction()*。修改的代码如下：
+现在当你在浏览器中访问 */* URL的时候，你会得到一个*404页面*，那是因为*/*没有匹配到任何的已定义路由。*ibw\_jobeet\_homepage*路由匹配*/hello/jobeet* URL，然后调用*DefaultController*的*indexAction()*。我们来改变它来匹配 */* URL，然后调用*JobController*的*indexAction()*。修改的代码如下：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing.yml
