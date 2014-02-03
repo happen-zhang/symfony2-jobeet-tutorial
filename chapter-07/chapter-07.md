@@ -2,13 +2,13 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-今天我们就来完成第二天中的`category`需求，实现`category`的相关页面：
+今天我们就来完成第二天中的*category*需求，实现*category*的相关页面：
 
-> 用户能够查看同一`category`中的所有`job`，并且`job`按照发布时间排序，每页显示20条`job`信息
+> 用户能够查看同一*category*中的所有*job*，并且*job*按照发布时间排序，每页显示20条*job*信息
 
 ## 配置Category路由 ##
 
-首先，我们要为`category`页面提添加易理解的URL。把下面的代码添加到路由文件的开头：
+首先，我们要为*category*页面提添加易理解的URL。把下面的代码添加到路由文件的开头：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing.yml
@@ -18,7 +18,7 @@ IbwJobeetBundle_category:
     defaults: { _controller: IbwJobeetBundle:Category:show }
 ```
 
-为了得到转义过的`category`名，我们需要在`Category`类中添加`getSlug()`方法：
+为了得到转义过的*category*名，我们需要在*Category*类中添加*getSlug()*方法：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Category.php
@@ -38,7 +38,7 @@ class Category
 
 ## 添加链接到Category页面的URL ##
 
-现在编辑`JobController`下的`index.html.twig`模板，让它能链接到`category`页面：
+现在编辑*JobController*下的*index.html.twig*模板，让它能链接到*category*页面：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/Job/index.html.twig -->
@@ -62,7 +62,7 @@ class Category
 {% endblock %}
 ```
 
-在上面的模板中，我们使用到了`category.morejobs`，所以我们需要定义它：
+在上面的模板中，我们使用到了*category.morejobs*，所以我们需要定义它：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Category.php
@@ -86,7 +86,7 @@ class Category
 }
 ```
 
-属于同一`category`下的`job`的总行数减去首页中显示同一`category`下的`job`列表的行数的结果就是`more_jobs`属性中`job`的数量（看代码）。
+属于同一*category*下的*job*的总行数减去首页中显示同一*category*下的*job*列表的行数的结果就是*more_jobs*属性中*job*的数量（看代码）。
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/JobController.php
@@ -108,7 +108,7 @@ public function indexAction()
 }
 ```
 
-我们需要在`JobRepository`类中加入`countActiveJobs()`方法：
+我们需要在*JobRepository*类中加入*countActiveJobs()*方法：
 
 ```PHP
 // src/Ibw/JobeetBundle/Repository/JobRepository.php
@@ -141,7 +141,7 @@ public function countActiveJobs($category_id = null)
 
 ## 创建CategoryController控制器 ##
 
-现在是时候创建 `CategoryController`控制器了。我们在`src/Ibw/JobeetBundle/Controller`目录下添加`CategoryController.php`文件：
+现在是时候创建 *CategoryController*控制器了。我们在*src/Ibw/JobeetBundle/Controller*目录下添加*CategoryController.php*文件：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/CategoryController.php
@@ -160,11 +160,11 @@ class CategoryController extends Controller
 }
 ```
 
-和之前的`job`类似，我们可以使用`doctrine:generate:crud`命令生成控制器，但其中生成的90%代码是我们不需要的，因此我们选择手动创建一个新的控制器。
+和之前的*job*类似，我们可以使用`doctrine:generate:crud`命令生成控制器，但其中生成的90%代码是我们不需要的，因此我们选择手动创建一个新的控制器。
 
 ## 更新数据库 ##
 
-我们现在为`category`添加一个`slug`列，同时加入`lifecycleCallbacks`来自动设置`slug`的值：
+我们现在为*category*添加一个*slug*列，同时加入*lifecycleCallbacks*来自动设置*slug*的值：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/doctrine/Category.orm.yml
@@ -198,11 +198,11 @@ Ibw\JobeetBundle\Entity\Category:
         preUpdate: [ setSlugValue ]
 ```
 
-删除`Category`实体（`src/Ibw/JobeetBundle/Entity/Category.php`）中的`getSlug()`方法，然后运行下面的命令更新`Category`实体：
+删除*Category*实体（*src/Ibw/JobeetBundle/Entity/Category.php*）中的*getSlug()*方法，然后运行下面的命令更新*Category*实体：
 
     php app/console doctrine:generate:entities IbwJobeetBundle
 
-现在你会看到`Category.php`中添加了下面的代码：
+现在你会看到*Category.php*中添加了下面的代码：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Category.php
@@ -236,7 +236,7 @@ public function getSlug()
 }
 ```
 
-修改`setSlugValue()`方法：
+修改*setSlugValue()*方法：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Category.php
@@ -253,7 +253,7 @@ class Category
 }
 ```
 
-因为我们为`category`加入了`slug`列，所以需要更新数据表，现在我们需要删掉之前的数据库并重新创建，然后加载`fixture`：
+因为我们为*category*加入了*slug*列，所以需要更新数据表，现在我们需要删掉之前的数据库并重新创建，然后加载*fixture*：
 
     php app/console doctrine:database:drop --force
     php app/console doctrine:database:create
@@ -262,7 +262,7 @@ class Category
 
 ## Category页面 ##
 
-现在我们需要往`showAction()`方法中添加一些东西了。在`CategoryController.php`中添加下面的代码：
+现在我们需要往*showAction()*方法中添加一些东西了。在*CategoryController.php*中添加下面的代码：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/CategoryController.php
@@ -288,7 +288,7 @@ public function showAction($slug)
 // ...
 ```
 
-接下来我们创建`show.html.twig`模板：
+接下来我们创建*show.html.twig*模板：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/Category/show.html.twig -->
@@ -329,7 +329,7 @@ public function showAction($slug)
 
 ## 包含一个Twig模板 ##
 
-你可能注意到了，我们在`category`中的`show.html.twig`创建`job`列表的HTML代码和`job`中的`index.html.twig`中的代码一样，代码重复很不好。当你需要重用模板中的一些代码，你需要创建一个新的`twig`模板，然后在需要的模板中把它包含进来即可。我们创建`list.html.twig`文件：
+你可能注意到了，我们在*category*中的*show.html.twig*创建*job*列表的HTML代码和*job*中的*index.html.twig*中的代码一样，代码重复很不好。当你需要重用模板中的一些代码，你需要创建一个新的*twig*模板，然后在需要的模板中把它包含进来即可。我们创建*list.html.twig*文件：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/Job/list.html.twig -->
@@ -348,7 +348,7 @@ public function showAction($slug)
 </table>
 ```
 
-你可以在模板中使用`include`函数来替换我们之前两个模板中的<table>标签的内容：
+你可以在模板中使用*include*函数来替换我们之前两个模板中的<table>标签的内容：
 
 ```HTML
 <!--src/Ibw/JobeetBundle/Resources/views/Job/index.html.twig -->
@@ -362,7 +362,7 @@ public function showAction($slug)
 
 ## 分页列表 ##
 
-现在（作者写这篇教程的时间）Symfony2没用提供好的分页工具，那我们就用经典的方式来实现分页吧。首先我们来为`IbwJobeetBundle_category`路由添加分页参数。分页参数有默认值为1，因此它可以不是必需的：
+现在（作者写这篇教程的时间）Symfony2没用提供好的分页工具，那我们就用经典的方式来实现分页吧。首先我们来为*IbwJobeetBundle_category*路由添加分页参数。分页参数有默认值为1，因此它可以不是必需的：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing.yml
@@ -378,7 +378,7 @@ IbwJobeetBundle_category:
     php app/console cache:clear --env=dev
     php app/console cache:clear --env=prod
 
-每页显示`job`的行数我们会在`app/config/config.yml`中定义：
+每页显示*job*的行数我们会在*app/config/config.yml*中定义：
 
 ```YAML
 # app/config/config.yml
@@ -389,7 +389,7 @@ parameters:
     max_jobs_on_category: 20
 ```
 
-修改`JobRepository::getActiveJobs()`方法，为它添加一个`$offset`参数：
+修改*JobRepository::getActiveJobs()*方法，为它添加一个*$offset*参数：
 
 ```PHP
 // src/Ibw/JobeetBundle/Repository/JobRepository.php
@@ -426,7 +426,7 @@ public function getActiveJobs($category_id = null, $max = null, $offset = null)
 //
 ```
 
-修改`Category::showAction()`方法：
+修改*Category::showAction()*方法：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/CategoryController.php
