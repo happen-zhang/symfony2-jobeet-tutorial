@@ -10,7 +10,7 @@
 {{ path('ibw_job_show', { 'id': entity.id }) }}
 ```
 
-这里使用了视图助手函数（template helper function）`path()`生成带有id值为1的*job* URL。*ibw\_job\_show*是路由使用的名称（具名路由），你可以在下面的内容中看到它们的定义。
+这里使用了视图助手函数（template helper function）*path()*生成带有id值为1的*job* URL。*ibw\_job\_show*是路由使用的名称（具名路由），你可以在下面的内容中看到它们的定义。
 
 ## 路由配置 ##
 

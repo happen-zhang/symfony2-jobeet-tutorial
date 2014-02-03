@@ -169,7 +169,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 
     sudo nano /etc/php5/apache2/php.ini
 
-在*php.ini*文件中的`[data]`部分找到`date.timezone`配置项，然后删除前面的`;`。
+在*php.ini*文件中的*[data]*部分找到*date.timezone*配置项，然后删除前面的*;*。
 
 ### 3、设置php.ini中的short\_open\_tag为false ###
 
