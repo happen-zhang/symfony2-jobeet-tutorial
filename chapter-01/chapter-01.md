@@ -4,23 +4,23 @@
 
 ## 什么是Jobeet？ ##
 
-`Jobeet`是一个发布求职和招聘信息的网站，它是开源的。在这一些列的教程中会教你怎么实现它。通过这`Jobeet`实例教程，你将会学到怎么使用最新的Web技术—`Symfony2.3.2`（你还不知道`Symfony`是什么？`Symfony`是一个`PHP框架`）。
+Jobeet是一个发布求职和招聘信息的网站，它是开源的。在这一些列的教程中会教你怎么实现它。通过这Jobeet实例教程，你将会学到怎么使用最新的Web技术—Symfony2.3.2（你还不知道Symfony是什么？Symfony是一个PHP框架）。
 
 对于每一天（每一章），从第一天开始一直到项目完成，你会学会如何去写代码实现一个真实的网站。
 
-在这个教程期间，我们每天（每一章）都会给`Jobeet`添加新的功能，同时我们也会在开发过程中向你介绍`Symfony`的新功能和在Web开发中的良好实践。
+在这个教程期间，我们每天（每一章）都会给Jobeet添加新的功能，同时我们也会在开发过程中向你介绍Symfony的新功能和在Web开发中的良好实践。
 
 今天是我们的第一天，你不用写任何的代码。相反，你先要搭建好开发环境。
 
 ## 搭建开发环境 ##
 
-首先，你需要去检查一下你的系统上是否能够友好地支持Web开发的环境。我们将会使在`VMware`虚拟机上使用`Ubuntu 12.04 LTS Server`进行开发。然后你的系统上需要有Web服务器（例如`Apache`）、数据库（`Mysql`）和`PHP`（版本不低于5.3.3），这些要求都是最基本的。
+首先，你需要去检查一下你的系统上是否能够友好地支持Web开发的环境。我们将会使在*VMware*虚拟机上使用*Ubuntu 12.04 LTS Server*进行开发。然后你的系统上需要有Web服务器（例如Apache）、数据库（Mysql）和PHP（版本不低于5.3.3），这些要求都是最基本的。
 
 ### 1、安装Apache作为你的服务器 ###
 
     sudo apt-get install apache2
 
-启动`Apache`的重写模块`mod-rewrite`：
+启动Apache的重写模块mod-rewrite：
 
     sudo a2enmod rewrite
 
@@ -42,21 +42,21 @@
 
 ## 下载和安装Symfony2.3.2 ##
 
-你现在需要做的事情是需要在服务器下准备一个目录来存放Jobeet项目。那我们就把那个目录命名为`jobeet`：`/var/www/jobeet`。
+你现在需要做的事情是需要在服务器下准备一个目录来存放Jobeet项目。那我们就把那个目录命名为`jobeet：/var/www/jobeet`。
 
     mkdir /var/www/jobeet
 
-现在目录已经准备好了，那么我们要在里面放些什么呢？点击<http://symfony.com/download>，选择 `Symfony Standard 2.3.2 without vendors（2.3.2标准版）`并进行下载。现在，把下载到的文件解压到刚才准备好的`jobeet目录`中。
+现在目录已经准备好了，那么我们要在里面放些什么呢？点击<http://symfony.com/download>，选择 *Symfony Standard 2.3.2 without vendors（2.3.2标准版）*并进行下载。现在，把下载到的文件解压到刚才准备好的*jobeet目录*中。
 
 ## 更新Vendors ##
 
-在这一步中，你将会更新`Symfony`，你会使用它来开始开发你的应用。一个`Symfony`项目通常需要依赖很多的扩展库，这些扩展库可以通过一个叫`Composer`的库来下载，并把下载的扩展库存放在`vendor/`目录下。
+在这一步中，你将会更新Symfony，你会使用它来开始开发你的应用。一个Symfony项目通常需要依赖很多的扩展库，这些扩展库可以通过一个叫*Composer*的库来下载，并把下载的扩展库存放在`vendor/`目录下。
 
-在`Symfony2.3.2标准版`中，你可以通过`Composer`来管理依赖库。先把`Composer`现在到`jobeet`目录：
+在Symfony2.3.2标准版中，你可以通过*Composer*来管理依赖库。先把Composer安装到*jobeet目录*：
 
     curl -s https://getcomposer.org/installer | php
 
-> 如果你还没有安装`curl`扩展，那么你可以使用如下的命令进行安装：
+> 如果你还没有安装*curl*扩展，那么你可以使用如下的命令进行安装：
 
 >     sudo apt-get install curl
 
@@ -66,7 +66,7 @@
 
 ## 网站服务器配置 ##
 
-一个良好的Web实践是，我们只把浏览器需要访问到的文件放在网站的根目录下，比如`css文件`，`js文件`，`图片`。在`Symfony项目`中，通常推荐把这些文件放在项目中的`web/子目录`中。现在来配置你的项目，你需要创建一个`虚拟主机（virtual host）`，打开你终端，输入下面的命令：
+一个良好的Web实践是，我们只把浏览器需要访问到的文件放在网站的根目录下，比如*css文件*，*js文件*，*图片*。在Symfony项目中，通常推荐把这些文件放在项目中的`web/`子目录中。现在来配置你的项目，你需要创建一个*虚拟主机（virtual host）*，打开你终端，输入下面的命令：
 
     sudo nano /etc/apache2/sites-available/jobeet.local
 
@@ -84,18 +84,18 @@
          </Directory>
     </VirtualHost>
 
-我们在Apache服务器中使用的`jobeet.local`本地域名需要被声明才能使用。如果你使用的`Linux`系统，那么你需要找到`/etc/hosts`文件。如果你使用的是`Windows`系统，你需要找到`c:\Windows\System32\drivers\etc\hosts`文件。把下面这行加入到`hosts`文件的末尾：
+我们在Apache服务器中使用的`jobeet.local`本地域名需要被声明才能使用。如果你使用的*Linux*系统，那么你需要找到`/etc/hosts`文件。如果你使用的是*Windows*系统，你需要找到`c:\Windows\System32\drivers\etc\hosts`文件。把下面这行加入到`hosts`文件的末尾：
 
     127.0.0.1 jobeet.local
 
-> 如果你是在非本地服务器上进行这些操作，你可以把`127.0.0.1`替换成远程服务器的ip地址。
+> 如果你是在非本地服务器上进行这些操作，你可以把*127.0.0.1*替换成远程服务器的ip地址。
 
-为了使以上的配置操作能够生效，你需要启动新配置的虚拟机，重启`Apache`服务器。打开你的终端，输入一下命令：
+为了使以上的配置操作能够生效，你需要启动新配置的虚拟机，重启Apache服务器。打开你的终端，输入一下命令：
 
     sudo a2ensite jobeet.local
     sudo service apache2 restart
 
-`Symfony`有一个自带测试工具来帮助你检查你的开发环境配置是否适合使用`Symfony`。你可以通过下面的URL来检查你的配置：
+Symfony有一个自带测试工具来帮助你检查你的开发环境配置是否适合使用Symfony。你可以通过下面的URL来检查你的配置：
 
 <http://jobeet.local/config.php>
 
@@ -151,7 +151,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 // ...
 ```
 
-当你运行`config.php`后，`Symfony`可能会需要你满足要求。完成下面这些配置能够帮助你消除`”warnings“`。
+当你运行`config.php`后，Symfony可能会需要你满足要求。完成下面这些配置能够帮助你消除*”warnings“*。
 
 ### 1、为app/cache和app/logs修改权限 ###
 
@@ -159,7 +159,7 @@ require_once __DIR__.'/../app/AppKernel.php';
     sudo chmod -R 777 app/logs
     sudo setfacl -dR -m u::rwX app/cache app/logs
 
-> 如果你还没有`ACL`，请先安装：
+> 如果你还没有*ACL*，请先安装：
 
 >     sudo apt-get install acl
 
@@ -169,7 +169,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 
     sudo nano /etc/php5/apache2/php.ini
 
-在`php.ini`文件中的`[data]`部分找到`date.timezone`配置项，然后删除前面的`“;”`。
+在`php.ini`文件中的`[data]`部分找到`date.timezone`配置项，然后删除前面的*“;”*。
 
 ### 3、设置php.ini中的short\_open\_tag为false ###
 
@@ -181,15 +181,15 @@ require_once __DIR__.'/../app/AppKernel.php';
     sudo apt-get install php-apc
     sudo service apache2 restart
 
-重启`Apache`，在浏览器中输入<http://jobeet.local/app_dev.php>，你将会看到下面这个页面：
+重启Apache，在浏览器中输入<http://jobeet.local/app_dev.php>，你将会看到下面这个页面：
 
 ![](imgs/01-02.jpg)
 
 ## Symfony2控制台 ##
 
-`Symfony2`自带了一个命令行工具，你可以使用它来完成不同任务。
+Symfony2自带了一个命令行工具，你可以使用它来完成不同任务。
 
-你可以输入下面的命令，查看`Symfony`控制台能为你做些什么：
+你可以输入下面的命令，查看Symfony控制台能为你做些什么：
 
     php app/console list
 
@@ -197,20 +197,20 @@ require_once __DIR__.'/../app/AppKernel.php';
 
 ### bundle（包）是什么 ###
 
-`bundle`十分类似于其他应用程序中的插件（`plugin`），但`bundle`比它们更好。在`Symfony2.3.2`中，所有的一切都是`Bundle`，包括核心的框架功能，还有你的应用中的代码。
+bundle十分类似于其他应用程序中的插件（plugin），但bundle比它们更好。在Symfony2.3.2中，所有的一切都是*Bundle*，包括核心的框架功能，还有你的应用中的代码。
 
-一个`bundle`就是实现一个功能的接口，它由许多文件组成，这些文件有组织地被放在一起，这就组成了一个`Bundle`（包）。
+一个bundle就是实现一个功能的接口，它由许多文件组成，这些文件有组织地被放在一起，这就组成了一个Bundle（包）。
 
 > Tips：一个Bundle能够在任何地方使用，只要它能够被自动加载（`app/autoload.php`）。
-> 在里可以了解更多关于`bundle系统`：<http://symfony.com/doc/current/book/page_creation.html#the-bundle-system>
+> 在里可以了解更多关于*bundle系统*：<http://symfony.com/doc/current/book/page_creation.html#the-bundle-system>
 
 ### 创建基本的bundle框架 ###
 
-执行下面的命令启动`Symfony`的`bundle`生成器：
+执行下面的命令启动Symfony的bundle生成器：
 
     php app/console generate:bundle --namespace=Ibw/JobeetBundle
 
-执行以上的命令后，在生成`bundle`之前，生成器会问你几个问题。下面是这些问题和答案（除了有一个不是默认的，其他全部都是默认的）
+执行以上的命令后，在生成bundle之前，生成器会问你几个问题。下面是这些问题和答案（除了有一个不是默认的，其他全部都是默认的）
 
     Bundle name [IbwJobeetBundle]: IbwJobeetBundle
     Target directory [/var/www/jobeet/src]: /var/www/jobeet/src
@@ -220,16 +220,16 @@ require_once __DIR__.'/../app/AppKernel.php';
     Confirm automatic update of your Kernel [yes]? yes
     Confirm automatic update of the Routing [yes]? yes
 
-生成`bundle`之后，清除`cache`：
+生成bundle之后，清除cache：
 
     php app/console cache:clear --env=prod
     php app/console cache:clear --env=dev
 
-新生成的`bundle`可以在`src目录`下找到：`src/Ibw/JobeetBundle`。`bundle`生成器会生成一个`DefaultController`，在这个控制器中有一个`indexAction`方法。你可以通过下面的`URL`访问：<http://jobeet.local/hello/jobeet>或者<http://jobeet.local/app_dev.php/hello/jobeet>
+新生成的bundle可以在`src`目录下找到：`src/Ibw/JobeetBundle`。bundle生成器会生成一个`DefaultController`，在这个控制器中有一个`indexAction()`方法。你可以通过下面的URL访问：<http://jobeet.local/hello/jobeet>或者<http://jobeet.local/app_dev.php/hello/jobeet>
 
 ## 删除AcmeDemoBundle ##
 
-`Symfony2.3.2`标准版中自带了一个完整的`demo`，它叫做`AcmeDemoBundle`。它是一个很好的参照样例，但你最终还是需要删除它的。
+Symfony2.3.2标准版中自带了一个完整的demo，它叫做`AcmeDemoBundle`。它是一个很好的参照样例，但你最终还是需要删除它的。
 
 ### 1、输入下面的命令删除Acme目录 ###
 
@@ -262,9 +262,9 @@ _acme_demo:
 
 ## 环境 ##
 
-`Symfony2.3.2`拥有不同的环境。如果你去查看`web目录`，你会发现有两个php文件：`app_dev.php`和`app.php`。这两个文件被叫做“`前端控制器`”，所有的请求都需要通过它们。`app.php`文件被用在`Production`环境，而`app_dev.php`则被用在`Development`环境。在`Development`环境下是十分方便的，因为它能够把所有程序中出现的的`errors`和`warnings`显示在调试栏（`Debug Toolbar`）上—开发者的最好的小伙伴。
+Symfony2.3.2拥有不同的环境。如果你去查看`web/`目录，你会发现有两个php文件：`app_dev.php`和`app.php`。这两个文件被叫做*“前端控制器”*，所有的请求都需要通过它们。`app.php`文件被用在*Production*环境，而`app_dev.php`则被用在*Development*环境。在*Development*环境下是十分方便的，因为它能够把所有程序中出现的的*errors*和*warnings*显示在调试栏（*Debug Toolbar*）上—开发者的最好的小伙伴。
 
-好了，今天就先到这。在下一天（章）中，我们将会给详细你讲解`Jobeet`都有哪些功能。
+好了，今天就先到这。在下一天（章）中，我们将会给详细你讲解Jobeet都有哪些功能。
 
 # 许可证 #
 
