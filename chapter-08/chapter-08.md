@@ -8,7 +8,8 @@ Symfony中有两种类型的测试：*单元测试*和*功能测试*。单元测
 
 Symfony2集成了一个独立的测试库：*PHPUtil*，它为你提供了一个好用的测试框架。为了能够运行测试，你需要安装*PHPUtil3.5.11*或者更新的版本。
 
-> 如果你还没安装过PHPUtil，你可以按照下面进行安装：
+> 如果你还没安装过*PHPUtil*，你可以按照下面进行安装：
+
 >     sudo apt-get install phpunit
 >     sudo pear channel-discover pear.phpunit.de
 >     sudo pear channel-discover pear.symfony-project.com
@@ -107,20 +108,21 @@ $this->assertEquals('n-a', Jobeet::slugify(''));
     FAILURES!
     Tests: 1, Assertions: 5, Failures: 1.
 
+
 现在修改*Jobeet::slugify*方法，在方法的开头添加下面的条件判断：
 
 ```PHP
 // src/Ibw/JobeetBundle/Utils/Jobeet.php
 // ...
  
-    static public function slugify($text)
-    {
-        if (empty($text)) {
-            return 'n-a';
-        }
- 
-        // ...
+static public function slugify($text)
+{
+    if (empty($text)) {
+        return 'n-a';
     }
+
+    // ...
+}
 ```
 
 现在测试能通过了，享受一下*green bar*带来的乐趣吧。
