@@ -530,7 +530,7 @@ public function showAction($slug, $page)
 
 如果您需要转载的话，请尊重原作者的知识产权，您可以通过把如下链接放到您转载文章中的头部或者尾部，谢谢。
 
-原文链接：<http://www.intelligentbee.com/blog/2013/08/07/symfony2-jobeet-day-1-starting-up-the-project/>
+原文链接：<http://www.intelligentbee.com/blog/2013/08/13/symfony2-jobeet-day-7-playing-with-the-category-page/>
 
 您可以在以下链接查看该许可证的全文：
 
