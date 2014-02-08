@@ -110,7 +110,7 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
     * [测试错误的表单](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-11/chapter-11.md#%E6%B5%8B%E8%AF%95%E9%94%99%E8%AF%AF%E7%9A%84%E8%A1%A8%E5%8D%95)
     * [用测试作保障](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-11/chapter-11.md#%E7%94%A8%E6%B5%8B%E8%AF%95%E4%BD%9C%E4%BF%9D%E9%9A%9C)
     * [“穿越未来”的测试](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-11/chapter-11.md#%E7%A9%BF%E8%B6%8A%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%B5%8B%E8%AF%95)
-    * [维护任务](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-11/chapter-11.md#%E7%BB%B4%E6%8A%A4%E5%B7%A5%E4%BD%9C)
+    * [维护任务](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-11/chapter-11.md#%E7%BB%B4%E6%8A%A4%E4%BB%BB%E5%8A%A1)
 * [第十二天：后台管理工具包—Sonata Admin]()
 * [第十三天：实现程序的安全性]()
 * [第十四天：完成订阅功能]()
