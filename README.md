@@ -123,7 +123,7 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
     * [登出（Logout）](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-13/chapter-13.md#%E7%99%BB%E5%87%BAlogout)
     * [用户Session](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-13/chapter-13.md#%E7%94%A8%E6%88%B7session)
     * [flash信息](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-13/chapter-13.md#flash%E4%BF%A1%E6%81%AF)   
-* [第十四天：完成订阅功能]()
+* [第十四天：订阅]()
 * [第十五天：为你的应用提供接口]()
 * [第十六天：Mailer]()
 * [第十七天：实现搜索功能]()
