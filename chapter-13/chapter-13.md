@@ -2,7 +2,7 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-## 让应用程序更加安全 ##
+## 实现程序的安全性 ##
 
 应用程序的安全性是一个两步验证的过程，它的目标是阻止用户访问他/她不应该访问到的资源。实现安全性的第一步是*认证（authentication）*，安全认证系统会取得用户提交的一些标识符，然后通过这个标识符分辨出用户的身份。一旦系统分辨出用户的身份之后，下一步就是系统对用户进行*授权（authorization）*，这一步将决定用户能够访问哪些给定的资源（系统会检查用户是否有权限进行这个操作）。我们可以通过配置*app/config*目录下的*security.yml*文件来对应用程序的安全组件进行配置。为了实现我们应用的安全性，我们修改*scurity.yml*文件：
 
