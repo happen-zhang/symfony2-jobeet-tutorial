@@ -117,7 +117,7 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
     * [创建Admin类](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-12/chapter-12.md#%E5%88%9B%E5%BB%BAadmin%E7%B1%BB)
     * [配置Admin类](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-12/chapter-12.md#%E9%85%8D%E7%BD%AEadmin%E7%B1%BB)
     * [批量操作（Batch Actions）](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-12/chapter-12.md#%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9Cbatch-actions)
-* [第十三天：实现程序的安全性]()
+* [第十三天：安全性]()
 * [第十四天：完成订阅功能]()
 * [第十五天：为你的应用提供接口]()
 * [第十六天：Mailer]()
