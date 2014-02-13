@@ -398,6 +398,7 @@ $foo = $session->get('foo');
 当用户访问一个*job*页面时，那么这个*job*对象会被添加到用户的浏览历史中，并且把它保存到session：
 
 ```PHP
+// src/Ibw/JobeetBundle/Controller/JobController.php
 // ...
  
 public function showAction($id)
