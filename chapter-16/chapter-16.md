@@ -4,6 +4,8 @@
 
 昨天我们为Jobeet添加一个只可读的（read-only）web service。现在用户可以申请*Affiliate*账户了，但是他们需要被管理员激活后才能够使用。为了*affiliate*能给拿到他们的*token*，管理员需要发送邮件来通知他们。这些就是我们今天要实现的功能。
 
+## Swift Mailer ##
+
 Symfony框架捆绑了最好的PHP邮件解决方案：[Swift Mailer](http://www.swiftmailer.org/)。当然，Symfony已经完全地集成了这个库，并且在它原有的功能上添加了一些很酷很好用的功能。我们开始工作吧，我们通过发送邮件给用户通知他们已被管理员激活了，并且告诉他们对应的*token*是多少。但在那之前，我们需要配置我们的环境：
 
 ```YAML
