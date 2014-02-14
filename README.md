@@ -135,7 +135,7 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
 * [第十六天：邮件](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-16/chapter-16.md)
     * [Swift Mailer](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-16/chapter-16.md#swift-mailer)
     * [测试](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-16/chapter-16.md#%E6%B5%8B%E8%AF%95)
-* [第十七天：实现搜索功能]()
+* [第十七天：搜索]()
 * [第十八天：使用Ajax]()
 * [第十九天：国际化和本地化]()
 
