@@ -132,7 +132,7 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
     * [测试Web Service](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-15/chapter-15.md#%E6%B5%8B%E8%AF%95web-service)
     * [Affiliate申请表单](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-15/chapter-15.md#affiliate%E7%94%B3%E8%AF%B7%E8%A1%A8%E5%8D%95)
     * [Affiliate后台管理](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-15/chapter-15.md#affiliate%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86)
-* [第十六天：Mailer]()
+* [第十六天：邮件]()
 * [第十七天：实现搜索功能]()
 * [第十八天：使用Ajax]()
 * [第十九天：国际化和本地化]()
