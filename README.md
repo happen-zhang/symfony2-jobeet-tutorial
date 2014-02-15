@@ -142,7 +142,7 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
     * [搜索](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-17/chapter-17.md#%E6%90%9C%E7%B4%A2)
     * [单元测试](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-17/chapter-17.md#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95)
     * [任务](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-17/chapter-17.md#%E4%BB%BB%E5%8A%A1)
-* [第十八天：使用Ajax]()
+* [第十八天：Ajax]()
 * [第十九天：国际化和本地化]()
 
 # 感谢 #
