@@ -142,7 +142,13 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
     * [搜索](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-17/chapter-17.md#%E6%90%9C%E7%B4%A2)
     * [单元测试](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-17/chapter-17.md#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95)
     * [任务](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-17/chapter-17.md#%E4%BB%BB%E5%8A%A1)
-* [第十八天：Ajax]()
+* [第十八天：Ajax](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md)
+    * [安装jQuery](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#%E5%AE%89%E8%A3%85jquery)
+    * [包含jQuery](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#%E5%8C%85%E5%90%ABjquery)
+    * [添加行为](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#%E6%B7%BB%E5%8A%A0%E8%A1%8C%E4%B8%BA)
+    * [用户反馈](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#%E7%94%A8%E6%88%B7%E5%8F%8D%E9%A6%88)
+    * [AJAX和Action](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#ajax%E5%92%8Caction)
+    * [测试AJAX](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#%E6%B5%8B%E8%AF%95ajax)
 * [第十九天：国际化和本地化]()
 
 # 感谢 #
