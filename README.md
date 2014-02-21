@@ -149,7 +149,12 @@ Symfony官网的Jobeet教程：<http://symfony.com/legacy/doc/jobeet?orm=Doctrin
     * [用户反馈](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#%E7%94%A8%E6%88%B7%E5%8F%8D%E9%A6%88)
     * [AJAX和Action](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#ajax%E5%92%8Caction)
     * [测试AJAX](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-18/chapter-18.md#%E6%B5%8B%E8%AF%95ajax)
-* [第十九天：国际化和本地化]()
+* [第十九天：国际化和本地化](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-19/chapter-19.md)
+    * [用户](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-19/chapter-19.md#%E7%94%A8%E6%88%B7)
+    * [Culture in the URL](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-19/chapter-19.md#culture-in-the-url)
+    * [Culture测试](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-19/chapter-19.md#culture%E6%B5%8B%E8%AF%95)
+    * [语言切换](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-19/chapter-19.md#%E8%AF%AD%E8%A8%80%E5%88%87%E6%8D%A2)
+    * [模板](https://github.com/happen-zhang/symfony2-jobeet-tutorial/blob/master/chapter-19/chapter-19.md#%E6%A8%A1%E6%9D%BF)
 
 # 感谢 #
 
