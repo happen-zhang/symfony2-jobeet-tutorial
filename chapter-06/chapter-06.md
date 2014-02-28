@@ -368,7 +368,7 @@ class Category
 
 ## 限制结果行数 ##
 
-我们现在需要限制Job信息列表中显示的行数为10行。实现这个功能非常简单，我们来给*JobRepository::getActiveJobs()*方法添加一个`$max`参数：
+我们现在需要限制Job信息列表中显示的行数为10行。实现这个功能非常简单，我们来给*JobRepository::getActiveJobs()*方法添加一个*$max*参数：
 
 ```PHP
 // src/Ibw/JobeetBundle/Repository/JobRepository.php
@@ -394,7 +394,7 @@ public function getActiveJobs($category_id = null, $max = null)
 }
 ```
 
-修改*indexAction()*方法中的代码，我们需要使用`$max`参数来调用*getActiveJobs()*方法：
+修改*indexAction()*方法中的代码，我们需要使用*$max*参数来调用*getActiveJobs()*方法：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/JobController.php
