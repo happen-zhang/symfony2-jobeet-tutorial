@@ -2,13 +2,13 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-## Symfony中的测试 ##
+## *Symfony*中的测试 ##
 
-Symfony中有两种类型的测试：**单元测试**和**功能测试**。单元测试是验证每个方法或者函数是否能够按照预期的结果正确运行。每个单元测试应该尽可能不要对其它模块有依赖关系。而功能测试则是验证整个应用程序的行为是否正确。今天我们先来讲解单元测试，而明天我们将会讲解功能测试。
+*Symfony*中有两种类型的测试：**单元测试**和**功能测试**。单元测试是验证每个方法或者函数是否能够按照预期的结果正确运行。每个单元测试应该尽可能不要对其它模块有依赖关系。而功能测试则是验证整个应用程序的行为是否正确。今天我们先来讲解单元测试，而明天我们将会讲解功能测试。
 
-Symfony2集成了一个独立的测试库：**PHPUtil**，PHPUtil为我们提供了一个好用的测试框架。为了能够运行测试，我们需要安装*PHPUtil3.5.11*或者更新的版本。
+*Symfony2*集成了一个独立的测试库：*PHPUtil*，*PHPUtil*为我们提供了一个好用的测试框架。为了能够运行测试，我们需要安装*PHPUtil3.5.11*或者更新的版本。
 
-> 如果你还没安装过**PHPUtil**，你可以按照下面进行安装：
+> 如果你还没安装过*PHPUtil*，你可以按照下面进行安装：
 
 >     sudo apt-get install phpunit
 >     sudo pear channel-discover pear.phpunit.de
@@ -21,15 +21,15 @@ Symfony2集成了一个独立的测试库：**PHPUtil**，PHPUtil为我们提供
 >     sudo pear install --alldeps phpunit/PHPUnit
 >     sudo pear install --force --alldeps phpunit/PHPUnit
 
-不管是单元测试还是功能测试，它都是一个存放在包（bundle）里的*Tests/*子目录下的一个PHP类。如果你遵循了这个约定，那么我们就可以在终端下运行下面的命令来对我们的应用程序进行测试：
+不管是单元测试还是功能测试，它都是一个存放在包（bundle）里的*Tests/*子目录下的一个*PHP*类。如果你遵循了这个约定，那么我们就可以在终端下运行下面的命令来对我们的应用程序进行测试：
 
     phpunit -c app/
 
-*-c*选项是告诉PHPUtil去*app/*目录下查找配置文件。如果你对PHPUtil的可选项感到好奇的话，你可以去查看*app/phputil.xml.dist*文件。
+**-c**选项是告诉*PHPUtil*去*app/*目录下查找配置文件。如果你对*PHPUtil*的可选项感到好奇的话，你可以去查看*app/phputil.xml.dist*文件。
 
-一个单元测试往往是只对一个指定的PHP类进行测试。现在我们来开始为*Jobeet::slugify()*方法写测试吧。
+一个单元测试往往是只对一个指定的*PHP*类进行测试。现在我们来开始为*Jobeet::slugify()*方法写测试吧。
 
-在*src/Ibw/JobeetBundle/Tests/Utils*目录下创建一个*JobeetTest.php*文件。通常来说，*Test/*下的目录结构应该和bundle目录下的结构是一样的，所以当我们为一个类进行单元测试时，我们需要把它放在*Tests/Utils/*目录下：
+在*src/Ibw/JobeetBundle/Tests/Utils*目录下创建一个*JobeetTest.php*文件。通常来说，*Test/*下的目录结构应该和*bundle*目录下的结构是一样的，所以当我们为一个类进行单元测试时，我们需要把它放在*Tests/Utils/*目录下：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Utils/JobeetTest.php
@@ -70,7 +70,7 @@ class JobeetTest extends \PHPUnit_Framework_TestCase
 
 ## 为新功能添加测试 ##
 
-对一个空字符串使用*slug()*方法得到的结果是一个空字符串。我们可以测试一下，它可以得到正确的结果。但一个空字符串作为URL并不是什么好主意。我们来修改*slugify()*方法，使它处理空字符串的时候返回的结果是"*n-a*"。
+对一个空字符串使用*slug()*方法得到的结果是一个空字符串。我们可以测试一下，它可以得到正确的结果。但一个空字符串作为*URL*并不是什么好主意。我们来修改*slugify()*方法，使它处理空字符串的时候返回的结果是"*n-a*"。
 
 我们可以先写一个测试，然后修改*slugify()*方法，一直到让测试能够通过，或者我们也可以使用其它类似的办法。虽然一开始编写的测试是不能被通过的，但先写好测试能让我们对预期要实现的代码有一个清晰的方法，这样我们就更加有信心确保编写出的代码的正确性。
 
@@ -129,7 +129,7 @@ static public function slugify($text)
 
 ## 为Bug添加测试 ##
 
-我们可以设想一下，当随着时间的推移，突然有一天你的一位用户给你反馈了一个奇怪的**bug**：有一些Job信息的链接被错误地转向到了**404页面**。经过了仔细的调查，你发现了其中的原因，因为有些Job数据中的*company*，*position*或者*location*的值是空的。
+我们可以设想一下，当随着时间的推移，突然有一天你的一位用户给你反馈了一个奇怪的**bug**：有一些*Job*信息的链接被错误地转向到了**404页面**。经过了仔细的调查，你发现了其中的原因，因为有些*Job*数据中的*company*，*position*或者*location*的值是空的。
 
 这可能吗？
 
@@ -159,13 +159,13 @@ static public function slugify($text)
 }
 ```
 
-现在测试已经能通过了。虽然我们测试的覆盖率是100%，但*slugfiy()*有一个bug。
+现在测试已经能通过了。虽然我们测试的覆盖率是100%，但*slugfiy()*有一个*Bug*。
 
-当写测试的时候，我们可能没有考虑到所有边界值测试用例的情况。当我们发现有Bug的时候，我们应该在纠正代码之前先编写测试。这是一件好事，这也意味着我们的代码会一次比一次好。
+当写测试的时候，我们可能没有考虑到所有边界值测试用例的情况。当我们发现有*Bug*时候，我们应该在纠正代码之前先编写测试。这是一件好事，这也意味着我们的代码会一次比一次好。
 
 ## 更好的*slugfiy*方法 ##
 
-你可能不知道Symfony是法国人开发的，没关系，让我们来添加一个带法国口音（accent）的测试用例（看代码）吧：
+你可能不知道*Symfony*是法国人开发的，没关系，让我们来添加一个带法国口音（accent）的测试用例（看代码）吧：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Utils/JobeetTest.php
@@ -205,7 +205,7 @@ static public function slugify($text)
 }
 ```
 
-我们要记得把PHP文件保存为**UTF-8编码**，这个是Symfony的默认编码，*iconv*的*transliteration*使用的也是**UTF-8**。
+我们要记得把*PHP*文件保存为**UTF-8编码**，这个是*Symfony*的默认编码，*iconv*的*transliteration*使用的也是**UTF-8**。
 
 修改测试文件，只有当*iconv*有效时才进行测试：
 
@@ -231,11 +231,11 @@ if (function_exists('iconv')) {
 
 我们需要记住的是，上面的结果仅仅说明所有代码都通过了单元测试，这仅仅意味着每一行都被执行过，不代表所有的边缘用例都被测试过。
 
-## Doctrine单元测试 ##
+## *Doctrine*单元测试 ##
 
-对Doctrine进行单元测试是个比较复杂的任务，因为它需要连接数据库。我们已经在开发中使用过Doctrine了，我们来为它编写一个单元测试吧，这是个好习惯哦。
+对*Doctrine*进行单元测试是个比较复杂的任务，因为它需要连接数据库。我们已经在开发中使用过*Doctrine*了，我们来为它编写一个单元测试吧，这是个好习惯哦。
 
-在教程的前几章内容中，我们介绍了可以通过设置来改变应用程序的环境。默认的，Symfony的所有测试都是运行在*Test*环境下，所以我们来为*Test*环境配置不同的数据库吧。
+在教程的前几章内容中，我们介绍了可以通过设置来改变应用程序的环境。默认的，*Symfony*的所有测试都是运行在*Test*环境下，所以我们来为*Test*环境配置不同的数据库吧。
 
 到*app/config/*目录下，复制一份*parameters.yml*并改名为*parameters_test.yml*。打开*parameters_test.yml*文件，修改数据库名为*jobeet_test*。这个文件需要被导入（import），所以我们把它加入到*config_test.yml*文件中：
 
@@ -247,11 +247,11 @@ imports:
 // ...
 ```
 
-## 测试Job实体 ##
+## 测试*Job*实体 ##
 
 首先我们需要在*Tests/Entiry/*目录下创建一个*JobTest.php*文件。
 
-*setUp()*方法会在每次运行测试的时候对数据库进行操作（连接，插入数据）。首先，它会删除当前存在的数据库，然后重新创建数据库并从Fixtures中加载数据。这些操作能够帮助我们在测试环境中每次运行测试的时候都能够有相同的初始数据供测试使用。
+*setUp()*方法会在每次运行测试的时候对数据库进行操作（连接，插入数据）。首先，它会删除当前存在的数据库，然后重新创建数据库并从*Fixtures*中加载数据。这些操作能够帮助我们在测试环境中每次运行测试的时候都能够有相同的初始数据供测试使用。
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Entity/JobTest.php
@@ -366,9 +366,9 @@ class JobTest extends WebTestCase
 }
 ```
 
-## 测试Repository类 ##
+## 测试*Repository*类 ##
 
-现在我们为JobRepository类编写测试，来看看我们在前几天内容中实现的方法有没有返回正确的值：
+现在我们为*JobRepository*类编写测试，来看看我们在前几天内容中实现的方法有没有返回正确的值：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Repository/JobRepositotyTest.php
@@ -503,7 +503,7 @@ class JobRepositoryTest extends WebTestCase
 }
 ```
 
-为CategoryRepository类编写测试：
+为*CategoryRepository*类编写测试：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Repository/CategoryRepositoryTest.php
@@ -602,8 +602,8 @@ class CategoryRepositoryTest extends WebTestCase
 
 ![](imgs/08-02.jpg)
 
-我们再来为JobRepository类添加一些测试来达到100%的覆盖率。
-现在，我们的数据库中有三个Category数据，其中有两个Category中只有0行有效的Job数据，另外一个Category仅仅只有一行有效的Job数据。我们会对少于三行有效的Job数据的Category进行*$max*和*$offset*参数的测试。为了完成测试，我们用下面的代码替换*testGetActiveJobs()*函数中的*foreach*语句块：
+我们再来为*JobRepository*类添加一些测试来达到100%的覆盖率。
+现在，我们的数据库中有三个*Category*数据，其中有两个*Category*中只有0行有效的*Job*数据，另外一个*Category*仅仅只有一行有效的*Job*数据。我们会对少于三行有效的*Job*数据的*Category*进行*$max*和*$offset*参数的测试。为了完成测试，我们用下面的代码替换*testGetActiveJobs()*函数中的*foreach*语句块：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Repository/JobRepositoryTest.php
