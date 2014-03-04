@@ -119,7 +119,7 @@ class Job
 // ...
 ```
 
-## 加入更多的Fixtures ##
+## 加入更多的*Fixtures* ##
 
 现在我们刷新浏览器中的*Job*首页，我们不会看到页面有任何的改变，因为我们之前加入到数据库中的*Job*数据都才仅仅发布了几天，所以现在数据库中的*Job*数据都是在有效期内的。让我们在*Fixture*文件中加入一些已过期的（*expired*）的*Job*数据吧：
 
@@ -496,7 +496,7 @@ public function load(ObjectManager $em)
 
 ![](imgs/06-02.png)
 
-## 过期的Job页面 ##
+## 过期的*Job*页面 ##
 
 如果一个*Job*不在有效期限内了，那么它将是不再可能被用户访问到的，即使用户知道它所在的*URL*也不行。我们可以尝试着访问过期的*Job*信息的页面（获得过期的*Job*信息的*id*的方法：`select id, token from job where expires_at < NOW()`，然后把获得的id替换下面*URL*中*ID*的值）:
 
