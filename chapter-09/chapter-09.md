@@ -2,11 +2,11 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-功能测试是一个很好的端到端（end to end）测试工具，端到端就是浏览器发出请求并接受服务器响应的过程。功能测试用于测试应用程序的所有层：*路由（the routing）*，*模型（the model）*，*行为（the actions）*和*模板（the templates）*。功能测试和你曾经手动做过的测试十分相似：每次当你为网站修改或者添加一个行为的的时候，你会去浏览器中检查被渲染页面中的链接或者页面元素是否和预期的结果一致。换句话说，你的手动测试其实就是对网站功能在适当的情境下进行测试。
+**功能测试**是一个很好的**端到端（end to end）**测试工具，端到端就是从浏览器发出请求并接受到服务器响应的过程。功能测试用于测试应用程序的所有层：**路由（the routing）**，**模型（the model）**，**行为（the actions）**和**模板（the templates）**。功能测试和我们曾经手动做过的测试的原理是十分相似的：每次当我们为网站修改或者添加一个行为的的时候，我们会去浏览器中检查被渲染页面中的链接或者页面元素是否和我们预期的结果一致。也就是说，我们进行手动测试的目的其实就是为了模拟将来某一时刻用户使用这些功能时的情景，功能是否按照预期的结果正确运行。
 
-因为手动测试的过程是乏味的而且容易出错。每次你修改了代码，你必须对所有的情景一步步地进行调试以确保你做的修改是正确的。这样的繁复的手动测试会让人疯掉的。Symfony中的功能测试提供了一种简单的方式来描述（decribe）情景（scenarios）。每个场景都能够一遍又一遍地再现模拟用户在浏览器中的操作。功能测试和单元测试一样，它能够让你对编写好的代码更加有信心。
+因为手动测试的过程是乏味而且容易出错的。每次我们对代码进行了修改时，我们就必须对所有的情景一步步地进行调试以确保我们做的修改是正确的。这样繁复的手动测试简直会让人疯掉的。*Symfony*中的功能测试提供了一种简单的方式来描述（decribe）情景（scenarios），以此来进行功能测试。每个场景都能够一遍又一遍地再现模拟用户在浏览器中的操作。功能测试和单元测试一样，它能够让我们对编写好的代码更加有信心确保其正确性。
 
-功能测试用一个明确的工作流：
+功能测试有一个明确的工作流：
 
 * 发出请求
 * 测试响应
@@ -16,7 +16,7 @@
 
 ## 第一个功能测试 ##
 
-功能测试通常是一个存放在*Tests/Controller*目录下的一个*PHP*文件。如果你想要测试被*CategoryController*类处理的页面，那么就需要创建*CategoryControllerTest*类，让它继承*WebTestCase*类：
+功能测试通常是一个存放在*Tests/Controller*目录下的一个*PHP*文件。如果我们想要测试被*CategoryController*类控制的页面，那么就需要创建*CategoryControllerTest*类，并让它继承*WebTestCase*类：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/CategoryControllerTest.php
@@ -98,7 +98,7 @@ class CategoryControllerTest extends WebTestCase
 }
 ```
 
-想要学些更多关于*crawler*的知识，可以通过[Symfony文档](http://symfony.com/doc/current/book/testing.html#the-crawler)进行学习。
+想要学些更多关于*crawler*的知识，你可以通过[Symfony文档](http://symfony.com/doc/current/book/testing.html#the-crawler)进行学习。
 
 ## 运行功能测试 ##
 
@@ -124,11 +124,11 @@ class CategoryControllerTest extends WebTestCase
 
 ## 编写功能测试 ##
 
-编写单元测试就像是在浏览器中进行情景模拟。我们在第二天中已经把所有的场景都已经描述出来了，我需要测试它们。
+编写功能测试就像是在浏览器中进行情景的模拟。我们在第二天的内容中已经把所有的场景都已经描述出来了，我们需要逐一地测试它们。
 
 首先，我们来编辑*JobControllerTest*类来测试*Jobeet*的首页。我们会一个个地对这些功能进行测试：
 
-### 过期的*job*不应该被显示出来 ###
+### 不在有效期内的*Job*数据不应该被显示出来 ###
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -210,11 +210,11 @@ class JobControllerTest extends WebTestCase
 }
 ```
 
-为了验证过期的*job*不能在首页中显示出来，我们通过对服务器返回的HTML页面进行匹配，检查是否有能和*css*选择器*.jobs td.position:contains("Expired")*匹配的HTML内容（还记得在*fixtures*吗？我们只在过期*job*的*position*中包含有“Expired”）。
+为了验证过期的*Job*数据不能在首页中被显示出来，我们需要通过对服务器返回的HTML页面进行匹配，检查是否有能和*css*选择器*.jobs td.position:contains("Expired")*相匹配的HTML内容（还记得*Fixtures*吗？我们只在过期*Job*数据的*position*列中包含了*“Expired”*字符）。
 
-### 一个*category*只能显示N行*job* ###
+### 一个*Category*只能显示N行*Job* ###
 
-把下面的代码添加到*testIndex()*函数后面。为了在功能测试中得到*app/config/config.yml*中的自定义参数，我们会使用到*内核（kernel）*:
+把下面的代码添加到*testIndex()*函数后面。为了在功能测试中得到*app/config/config.yml*中的自定义参数，我们会使用到**内核（kernel）**:
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -228,8 +228,7 @@ public function testIndex()
 }
 ```
 
-为了能进行测试，我们需要为*Job/index.html.twig*中的每个*category*添加适当的*css类*（这样做才能够选择出每个*category*并计算被显示出*job*的数量）：
-
+为了能进行测试，我们需要为*Job/index.html.twig*中的每个*Category*添加适当的*css class*（这样做才能够选择出每个*Category*并计算被显示出的*Job*信息数量）：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/Job/index.html.twig -->
@@ -241,7 +240,7 @@ public function testIndex()
 <!-- ... -->
 ```
 
-### 只有当*category*中有过多的*job*时才有*and...more...* ###
+### 只有当*Category*中有过多的*Job*数据时才有*and...more...* ###
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -255,9 +254,9 @@ public function testIndex()
 
 在这个测试中，我们检查*design*分类没有*"more jobs"*链接（即*\.category\_design \.more\_jobs*不存在），检查*programming*有*"more jobs"*链接（即*\.category\_design \.more\_jobs*存在）。
 
-### *job*按照日期排序 ###
+### *Job*列表按照日期排序 ###
 
-为了检查*job*是否按照日期来排序，我们需要检查第一行*job*是否和我们所预期的一样。通过检查URL中是否包含有预期*job*的主键来实现这个测试。主键可能在运行期间被改变，我们首先要从数据库中得到*Doctrine*对象。
+为了检查*Job*列表是否按照日期来排序，我们需要检查第一行的*Job*信息是否和我们所预期的一样。我们可以通过检查*URL*中是否包含有预期*Job*数据的主键来实现这个测试。主键可能在运行期间被改变，我们首先要从数据库中得到*Doctrine*对象。
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -276,7 +275,7 @@ public function testIndex()
 }
 ```
 
-即使测试只在测试阶段才运行，但是我们也需要对代码进行重构，比如像获得*programming*分类中的第一个*job*的功能，使得这个功能在其它的地方也能够被重用。我们不会把这些代码移到*Model*层里，因为这些代码只用在编写测试中。相反地，我们会把代码放在测试类里的*getMostRecentProgrammingJob()*函数中：
+即使测试只在测试阶段才运行，但是我们也同样需要对代码进行重构，比如像获得*programming*分类中的第一条*Job*数据的功能，使得这个功能在其它的地方也能够被重用。我们不会把这些代码移到*Model*层里，因为这些代码只用在编写测试中。相反地，我们会把代码放在测试类里的*getMostRecentProgrammingJob()*函数中：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -310,11 +309,11 @@ $this->assertTrue($crawler->filter('.category_programming tr')->first()->filter(
 //...
 ```
 
-### 在首页中的每个*job*都是可以点击的 ###
+### 在首页中的每条*Job*信息都是可以链接的 ###
 
-为了测试首页中*job*的链接，我们在*“Web Developer”*文本上进行模拟点击。首页中有很多的*job*，我们指定要求浏览器点击第一个*job*。
+为了测试首页中*Job*列表的链接，我们在*“Web Developer”*文本上进行模拟链接。首页中有很多的*Job*信息，我们指定要求浏览器点击第一条*Job*信息。
 
-测试URL中的每个请求参数，以确保点击链接后的路由能够正确地工作。
+测试*URL*中的每个请求参数，以确保点击链接后的路由能够正确地工作。
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php 
@@ -337,7 +336,7 @@ public function testIndex()
 
 ### 学习例子 ###
 
-在这一部分中包含有测试*job*和*category*页面的所需的代码。请仔细阅读代码，你也许能够从中学到一些小技巧：
+在这一部分中包含有测试*Job*和*Category*页面所需的代码。请仔细阅读代码，你也许能够从中学到一些小技巧：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -609,7 +608,7 @@ class CategoryControllerTest extends WebTestCase
 }
 ```
 
-今天我们就先到这啦，明天我们会讲解表单（forms），那么明天见！
+今天我们就先到这啦，明天我们会讲解表单（forms），那么我们明天见！
 
 # 许可证 #
 
