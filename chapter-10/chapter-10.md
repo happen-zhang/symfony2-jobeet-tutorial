@@ -2,18 +2,18 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-从简单的*联系表单（contact form）*到带有很多个表单域的复杂表单，任何一个网站都会有表单的身影出现。对于一位*Web开发者*来说，编写表单是一个复杂而且乏味的工作之一：你需要去使用HTML代码把表单显示出来，然后需要为每个表单域添加验证规则，再把提交的值处理后保存到数据库中，（如果表单数据有错误）还需要把错误信息反馈给用户，而且还需要补完用户没有错误的表单域等等...
+从简单的**联系表单（contact form）**到带有很多个表单域的复杂表单，任何一个网站都会有表单的身影出现。对于一位*Web*开发者来说，编写表单是一个复杂而且乏味的工作之一：我们需要使用*HTML*代码把表单显示出来，然后需要为每个表单域添加验证规则，再把提交到服务器的表单值处理后保存到数据库中，（如果表单数据有错误）还需要把错误信息反馈给用户，而且还需要填充完用户没有错误的表单域等等...
 
-在第三天的教程中，我门使用了`doctrine:generate:crud`命令为*Job*实体生成了一个简单的*CRUD*控制器。同时也生成了一个*Job*表单，你可以在*/src/Ibw/JobeetBundle/Form/JobType.php*文件中找到。
+在第三天的内容中，我门使用了`doctrine:generate:crud`命令为*Job*实体类生成了一个简单的*CRUD*控制器。同时也生成了一个*Job*表单，我们可以在*/src/Ibw/JobeetBundle/Form/JobType.php*文件中找到它。
 
 ## 自定义*Job*表单 ##
 
-*Job*表单是一个学习如何自定义表单的一个好例子。我们来一步步地学习怎样自定义表单。
+*Job*表单是一个学习如何自定义表单的一个好例子。我们来一步步地学习怎样进行自定义表单。
 
 首先，修改*layout*中的*Post a Job*，让它能够正确转向到*Post*页面：
 
 ```HTML
-// src/Ibw/JobeetBundle/Resources/views/layout.html.twig
+<!-- src/Ibw/JobeetBundle/Resources/views/layout.html.twig -->
 <a href="{{ path('ibw_job_new') }}">Post a Job</a>
 ```
 
@@ -52,7 +52,7 @@ public function createAction(Request $request)
 // ...
 ```
 
-*Doctrine*默认是按照数据表中的列（columns）来生成的表单域的。但对于*Job*表单来说，有些表单域是不需要被最终用户（the end user）填写的。把*Job*表单编辑如下：
+*Doctrine*默认是按照数据表中的列（columns）来生成表单域的。但对于*Job*表单来说，有些表单域是不需要被最终用户（the end user）填写的。我们把*Job*表单编辑如下：
 
 ```PHP
 // src/Ibw/JobeetBundle/Form/JobType.php
@@ -96,7 +96,7 @@ class JobType extends AbstractType
 }
 ```
 
-表单的设置要比数据表的设置更加精确。举个例子，*email*列在数据表中仅仅只要求是*varchar*类型的，而表单中则需要验证*email*要有正确的形式。在Symfony2中，表单验证被隐含在实体对象之中（比如Job）。换句话说，问题不是验证表单（form）是否有效，而是验证*Job*对象是否有效（表单提交后的数据会被一一映射成Job对象中的属性值）。为了做到这点，我们在*Resources/config*目录下创建一个*validation.yml*文件：
+表单的设置要比数据表的设置更加精确。举个例子来说吧，*email*列在数据表中仅仅只要求是*varchar*类型的，而表单中则需要验证*email*要有正确的格式。在*Symfony2*中，表单验证被隐含在实体对象之中（比如*Job*）。换句话说，我们的问题不是验证表单（form）是否有效，而是验证*Job*对象是否有效（表单提交后的数据会被一一映射成*Job*对象中的属性值）。为了做到这点，我们在*Resources/config*目录下创建一个*validation.yml*文件：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/validation.yml
@@ -161,7 +161,7 @@ Ibw\JobeetBundle\Entity\Job:
             - Email: ~
 ```
 
-对于每个表单域，Symfony会自动生成一个*label*。它能通过*label*选项来进行改变：
+对于每个表单域，*Symfony*会为每个表单域自动生成一个*label*。我们能通过*label*选项来修改默认的*label*值：
 
 ```PHP
 // src/Ibw/JobeetBundle/Form/JobType.php
@@ -178,7 +178,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 }
 ```
 
-你同样需要为剩下的表单域添加验证约束：
+我们同样需要为剩下的表单域添加验证约束：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/validation.yml
@@ -210,7 +210,7 @@ Ibw\JobeetBundle\Entity\Job:
 
 这里约束*url*表单域值只能像*http://www.sitename.domain*或者*https://www.sitename.domain*这样的格式。
 
-修改完*validation.yml*之后，你需要清除*cache*。
+修改完*validation.yml*之后，我们需要清除*cache*。
 
 ## Symfony2处理上传文件 ##
 
@@ -225,7 +225,7 @@ public $file;
 // ...
 ```
 
-现在我们需要把*logo*文本域替换成*文件域*：
+现在我们需要把*logo*文本域替换成文件域：
 
 ```PHP
 // src/Ibw/JobeetBundle/Form/JobType.php
@@ -252,7 +252,7 @@ Ibw\JobeetBundle\Entity\Job:
             - Image: ~
 ```
 
-当表单提交之后，*文件域*会被映射成*UploadedFile*类的一个实例。你能通过给它一个参数来移动上传文件的位置。在这之后你会看到*job*的*logo*属性会被设置成上传文件的名字。
+当表单提交之后，文件域会被映射成*UploadedFile*类的一个实例。我们能通过给它一个参数来改变上传文件存放的位置。在这之后我们将会看到*Job*类的*logo*属性会被设置成上传文件的名字。
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/JobController.php
@@ -284,7 +284,7 @@ public function createAction(Request $request)
 // ...
 ```
 
-你需要创存放*logo*图片的目录（*web/uploads/jobs*），并且确保这个目录是可以写的。
+我们需要创存放*logo*图片的目录（*web/uploads/jobs*），并且确保这个目录是可以写的。
 
 尽管能有这种方式处理文件的上传，但我们有更好的方式，那就是使用*Job*实体。
 
@@ -319,7 +319,7 @@ class Job
 
 *logo*属性保存的值是上传文件的相对路径，它会被保存到数据库中。*getAbsolutePath()*方法返回的是上传文件的绝对路径，而*getWebPath()*方法是返回的是web路径，我们可以在模板中使用它。
 
-我们会把数据库持久化和上传文件实现得具有“原子性（atomic）”：即如果不能成功保存*Job*实体到数据库或者文件上传失败，那么这两件事都不会成功（比如实体成功保存到数据库了，但文件上传失败了，这种情况属于操作失败，那么数据库保存的数据也必须撤销掉）。我们在当*Doctrine*成功保存实体后才把上传文件存在目录中。我们可以通过*Job*实体的*lifecycle callback*来完成这项操作。就像我们在第三天的教程做的，我们在*Job.orm.yml*中添加*preUpload*，*upload* 和*removeUpload*回调方法：
+我们会把数据库持久化和上传文件实现得具有“原子性（atomic）”：即如果不能成功保存*Job*实体到数据库或者文件上传失败，那么这两件事都将会失败（比如实体成功保存到数据库了，但文件上传失败了，这种情况属于操作失败，那么数据库保存的数据也必须撤销掉）。我们在当*Doctrine*成功保存实体后才把上传文件存在目录中。我们可以通过*Job*实体的*lifecycle callback*来完成这项操作。就像我们在第三天内容中所做的，我们在*Job.orm.yml*中添加*preUpload*，*upload* 和*removeUpload*回调方法：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/doctrine/Job.orm.yml
@@ -558,7 +558,7 @@ class Job
 {{ form(form) }}
 ```
 
-`form(form)`会显示每个表单域，而且还会带有*label*和*error*信息（如果有的话）。虽然这种方式简单，但是它不是很灵活。更多时候你需要去自定义表单域的显示，以更好地控制它们的样式外观。
+`form(form)`会显示每个表单域，而且还会带有*label*和*error*信息（如果有的话）。虽然这种方式简单，但是它不是很灵活。更多时候我们需要去自定义表单域的显示，以更好地控制它们的样式外观。
 
 我们也使用一种叫做[form theming](http://symfony.com/doc/current/book/forms.html#form-theming)的技术来自定义[form errors](http://symfony.com/doc/current/cookbook/form/form_customization.html#customizing-error-output)的渲染。你可以参考[Symfony2的官方文档](http://symfony.com/doc/current/book/index.html)。
 
@@ -692,18 +692,18 @@ class Job
 
 ## 表单行为（*Action*） ##
 
-现在我们已经有了一个表单类（*JobType*）和一个利用它生成表单的模板。现在时候让它能够做一点实际的行为了。*Job*表单被*JobController*中的四个方法所管理着：
+现在我们已经有了一个表单类（*JobType*）和一个利用它生成表单的模板。现在是时候让它能够做一点实际的行为了。*Job*表单被*JobController*中的四个方法所管理着：
 
 * _newAction_：显示一个空表单用来创建一个新_job_
 * _createAction_：处理表单（表单验证，表单填充）和利用用户提交的表单值实例化一个_Job_对象
 * _editAction_：显示一个已存在_job_的编辑表单
 * _updateAction_：处理表单（表单验证，表单填充）和利用用户提交的表单值更新已存在的_Job_对象
 
-当你浏览*/job/new page*时，*createForm()*方法会实例化一个新的*job*表单实例，然后把这个表单实例传递给模板（newAction）。
+当你浏览*/job/new page*时，*createForm()*方法会实例化一个新的*job*表单实例，然后把这个表单实例传递给模板（*newAction*）。
 
-当用户提交了表单（*createAction*），表单就绑定有用户提交的值（*bind($request)*方法），同时也会触发表单验证。一旦表单被绑定了，那么就可以使用*isValid()*方法验证表单是否有效：如果表单有效（返回true），那么*job*就会被保存到数据库中（*$em->persist($entity)*），然后用户会被重定向到*job*的预览页面；如果表单无效，那么*new.html.twig*模板会被重新渲染，而且表单还会自动填充用户提交上来的表单值，同时还会显示出错误信息。修改一个已存在的*job*和这个过程很相似。*new*和*edit*行为唯一不同的是，需要被修改的*job*对象是被作为*crateForm()*方法的第二个参数所使用。在模板中，这个对象的值的会被用来当做默认表单域的值。
+当用户提交了表单（*createAction*），表单就绑定有用户提交的值（*bind($request)*方法），同时也会触发表单验证。一旦表单被绑定了，那么就可以使用*isValid()*方法验证表单是否有效：如果表单有效（返回true），那么*Job*数据就会被保存到数据库中（*$em->persist($entity)*），然后用户会被重定向到*Job*数据的预览页面；如果表单无效，那么*new.html.twig*模板会被重新渲染，而且表单还会自动填充用户提交上来的表单值，同时还会显示出错误信息。修改一个已存在的*Job*和这个过程很相似。*new*和*edit*行为唯一不同的是，需要被修改的*Job*对象是被作为*crateForm()*方法的第二个参数所使用。在模板中，这个对象的值的会被用来当做默认表单域的值。
 
-你也可以为*creation*表单定义默认的值。我们会传递一个预修改的*job*对象给*createForm()*方法来设置*type*的默认值为*full-time*：
+我们也可以为*creation*表单定义默认的值。我们会传递一个预修改的*Job*对象给*createForm()*方法来设置*type*的默认值为*full-time*：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/jobController.php
@@ -726,7 +726,7 @@ public function newAction()
 
 ## 使用*Token*来保护表单 ##
 
-现在一切都进展顺利，可是用户必须得填写*token*才行。通常来说，*job*的*token*应该在这个*job*被创建的时候自动生成，我们不想让用户自己去提供这个唯一值的*token*。给*Job*实体的*prePersist lifecycleCallbacks*添加*setTokenValue*方法：
+现在一切都进展顺利，可是用户必须得填写*token*才能添加*Job*数据。通常来说，*token*应该是在这个*Job*数据被创建的时候自动生成的，我们不想让用户自己去提供这个唯一值的*token*。给*Job*实体的*prePersist lifecycleCallbacks*添加*setTokenValue*方法：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/doctrine/Job.orm.yml
@@ -821,9 +821,9 @@ public function buildForm(FormBuilderInterface $builder, array $options)
         - NotBlank: ~
 ```
 
-还记得第二天中的用户stories的吗，只有用户知道*job*的*token*才能修改*job*。很好，修改或者删除一个*job*是多么得简单呀，你只需要去猜那个URL中的*token*什么值就可以办到了。修改*job*信息的访问URL类似于*/job/ID/edit*，这里的*ID*是*job*的主键。
+还记得第二天内容中的用户*stories*吗，只有用户知道*Job*的*token*才能对该*Job*信息进行修改。很好，修改或者删除一个*Job*数据是多么得简单呀，你只需要去猜那个URL中的*token*是什么值就可以办到了，你说这不是很简单（keng ren）吗？。修改*Job*信息的访问URL类似于*/job/ID/edit*，这里的*ID*是*Job*的主键。
 
-我们来修改路由，只有URL带上*token*才能修改和删除*job*：
+我们来修改路由，只有URL带上*token*才能修改和删除*Job*信息：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing/job.yml
@@ -953,11 +953,11 @@ class JobController extends Controller
 <form action="{{ path('ibw_job_update', {'token': entity.token}) }}" method="post" {{ form_enctype(edit_form) }}>
 ```
 
-除了*job_show_user*路由外，其他和*job*相关的路由都已经带上了*token*。现在，修改一个*job*的URL样式类似于这样：*http://jobeet.local/job/TOKEN/edit*
+除了*job_show_user*路由外，其他和*Job*相关的路由都已经带上了*token*。现在，一个*Job*的URL样式应该是类似于这样的：*http://jobeet.local/job/TOKEN/edit*
 
 ## 预览页面 ##
 
-预览页面和*job*页面显示的内容是一样的。唯一不同的是，预览页面是通过*token*访问的，而不是通过*id*：
+预览页面和*Job*页面显示的内容是一样的。唯一不同的是，预览页面是通过*token*访问的，而不是通过*id*：
 
 ```YMAL
 # src/Ibw/JobeetBundle/Resources/config/routing/job.yml
@@ -1005,7 +1005,7 @@ public function previewAction($token)
 // ...
 ```
 
-如果用户是通过带*token*的URL访问到页面的，那么我们就会在页面顶部添加一个*admin*栏。在*show.html.twig*的开头包含（include）一个模板，这个模板是用来显示*admin*栏的。同时删除底部的*edit*链接：
+如果用户是通过带*token*的URL访问到页面的，那么我们就会在页面顶部显示一个*admin*栏。在*show.html.twig*的开头包含（include）一个模板，这个模板是用来显示*admin*栏的。同时删除底部的*edit*链接：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/Job/show.html.twig -->
@@ -1085,7 +1085,7 @@ public function getDaysBeforeExpires()
 // ...
 ```
 
-*admin*栏随着*job*状态的不同显示出来的样式也会不同：
+*admin*栏随着*Job*状态的不同显示出来的样式也会不同：
 
 ![](imgs/10-01.png)
 
@@ -1127,7 +1127,7 @@ public function updateAction(Request $request, $token)
 }
 ```
 
-就像我们之前所说的，如果你知道*token*的话就可以修改一个*job*，或者你是这个网站的管理员。但是我们现在去访问*job*页面的话，你可以看到一个*Edit*链接，这样的用户体验让人感觉不好。修改*show.html.twig*，删除*Edit*链接：
+就像我们之前所说的，如果你知道*token*或者你是*Jobeet*的管理员的话，你就有权可以修改一条*Job*信息。但是我们现在去访问*Job*页面的话，我们可以看到页面上有一个*Edit*链接，这样的用户体验让人感觉不好。我们来修改*show.html.twig*，删除*Edit*链接：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/Job/show.html.twig -->
@@ -1138,9 +1138,9 @@ public function updateAction(Request $request, $token)
 </div>
 ```
 
-## Job激活和发布 ##
+## *Job*激活和发布 ##
 
-在*job*页面的上部分有一个发布*job*的链接，这个链接需要被指定到*publishAction()*上。我们先创建一个新的路由：
+在*Job*页面的上部分有一个发布*Job*信息的链接，这个链接需要被指定到*publishAction()*上。我们先创建一个新的路由：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing/job.yml
@@ -1152,7 +1152,7 @@ ibw_job_publish:
     requirements: { _method: post }
 ```
 
-现在我们来修改*Publish*链接（我们在这里使用表单，就像删除一个*job*一样，它会发送一个*POST*请求）：
+现在我们来修改*Publish*链接（我们在这里使用表单，就像删除一个*Job*一样，它会发送一个*POST*请求）：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/Job/admin.html.twig -->
@@ -1244,9 +1244,9 @@ public function publish()
 // ...
 ```
 
-现在你可以在浏览中测试*publish*功能了。
+现在我们可以在浏览中测试*publish*功能了。
 
-但现在我们依然还有问题需要去修正。那些未被激活的*job*是不可以被访问到的，也不能出现在首页中。我们需要修改*JobRepository*：
+但现在我们依然还有问题需要去修正。那些未被激活的*Job*数据是不可以被访问到的，也不能出现在首页中。我们需要修改*JobRepository*：
 
 ```PHP
 // src/Ibw/JobeetBundle/Repository/JobRepository.php
@@ -1345,7 +1345,7 @@ class CategoryRepository extends EntityRepository
 }
 ```
 
-好了，今天就这些了。你可以在浏览器中测试一下今天的实现的内容。所有未被激活的*job*是不能显示到首页中的，即使你知道URL链接，它们也是不可以被访问到的。不过，如果你知道带*token*的URL的话就可以访问到，在这种情况下，*job*预览页面顶部会显示出*admin*栏。
+好了，今天就这些了。你可以在浏览器中测试一下今天的实现的内容。所有未被激活的*Job*数据是不会显示到首页中的，即使你知道URL链接，它们也是不可以被访问到的。不过，如果你知道带*token*的URL的话就可以访问到，在这种情况下，*Job*预览页面顶部会显示出*admin*栏。
 
 # 许可证 #
 
