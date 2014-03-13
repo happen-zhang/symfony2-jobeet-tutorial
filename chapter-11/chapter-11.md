@@ -2,11 +2,11 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-在第十天中，我们使用*Symfony 2.3*创建了第一个表单。现在用户能够在*Jobeet*上发布*job*了，但是我们还没来得及给它做测试呢。别担心，我们会沿着这种开发模式进行下去的。
+在第十天的内容中，我们使用*Symfony 2.3*创建了我们的第一个表单。现在用户能够在*Jobeet*上发布*Job*信息了，但是我们还没来得及给它做测试呢。别担心，我们会沿着这种（边开发边测试的）开发模式进行下去的。
 
 ## 提交表单 ##
 
-打开*JobControllerTest.php*，为*job*创建和表单验证添加功能测试。在文件末尾加入下面的代码，测试能够正确访问*job*创建页面：
+打开*JobControllerTest.php*，为*Job*信息的创建和表单验证添加功能测试。我们在文件末尾加入下面的代码，测试是否能够正确访问到创建*Job*的页面：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -21,7 +21,7 @@ public function testJobForm()
 }
 ```
 
-为了能够选择表单标签，我们会使用*selectButton()*方法。这个方法能够选择*button*标签和*submit*类型的*input*标签。只要你有一个表示*button*的*Crawler*，你就可以调用*form()*方法得到包含这个*button*结点的表单的*Form*实例。
+为了让功能测试能够模拟点击按钮来提交表单，我们会使用*selectButton()*方法。这个方法能够选择*button*标签和*submit*类型的*input*标签。只要你有一个表示*button*的*Crawler*，你就可以调用*form()*方法得到包含这个*button*结点的表单的*Form*实例。
 
 ```PHP
 $form = $crawler->selectButton('Submit Form')->form();
@@ -29,7 +29,7 @@ $form = $crawler->selectButton('Submit Form')->form();
 
 > 上面的例子中选择了属性值为*Submit Form*的*submit*类型的*input*标签。
 
-你可以在调用*form()*方法的时候给它传递一个数组类型的参数来重载默认的调用：
+我们可以在调用*form()*方法的时候给它传递一个数组类型的参数来重载默认的调用：
 
 ```PHP
 $form = $crawler->selectButton('submit')->form(array(
@@ -38,7 +38,7 @@ $form = $crawler->selectButton('submit')->form(array(
 ));
 ```
 
-我们来实际操作一下选择表单和传递参数的过程：
+现在我们来实际操作一下选择表单和传递参数的过程：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -68,13 +68,13 @@ public function testJobForm()
 }
 ```
 
-你也可以模拟浏览器中的文件上传，只要你把上传文件的绝对路径传递给它就行了。
+我们也可以模拟浏览器中的文件上传，我们只要把上传文件的绝对路径传递给它就行了。
 
-表单提交之后，我们测试处理的*action*是否为*create*。
+表单提交之后，我们需要测试处理提交表单的*action*是否为*create*。
 
 ## 测试表单 ##
 
-如果表单的值是有效的，那么*job*应该被创建出来，然后用户会重定向到*preview*页面：
+如果表单的值是有效的，那么*Job*信息应该就可以创建成功，然后用户会被重定向到*preview*页面：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -88,7 +88,7 @@ public function testJobForm()
 
 ## 测试数据库记录 ##
 
-最后，我们需要测试数据库中是否有刚才创建的*job*数据，测试当用户未发布*job*时*is_activated*列是否被设置成*false*：
+最后，我们需要测试数据库中是否有刚才创建的*Job*数据，还需要测试当用户未公布*Job*信息时*is_activated*列是否被设置成*false*：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -107,7 +107,7 @@ public function testJobForm()
 
 ## 测试错误的表单 ##
 
-有效的*job*表单提交和我们预期的结果一样。我们来为无效的*job*表单做测试：
+正确的*Job*表单信息提交后的结果和我们预期的结果一样。现在我们来为错误的*Job*信息表单做测试：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -137,7 +137,7 @@ public function testJobForm()
 }
 ```
 
-现在我们来测试*preview*页面中的*admin*栏。当一个*job*还未被激活时，你可以对它进行*edit*，*delete*或者*publish*操作。为了测试这三个*action*，我们首先需要创建一个*job*。为了避免过多的复制粘贴，我们给*JobControllerTest*类添加一个创建*job*的方法：
+现在我们来测试*preview*页面中的*admin*栏。当一条*Job*信息还未被激活时，我们可以对它进行*edit*，*delete*或者*publish*操作。为了测试这三个*action*，我们首先需要创建一条*Job*信息。为了避免过多的复制和粘贴，我们给*JobControllerTest*类添加一个*createJob()*的方法：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -165,7 +165,7 @@ public function createJob($values = array())
 }
 ```
 
-*createJob()*方法创建一个*job*，然后进行页面跳转（转到*preview*页面）。你可以给*createJob()*方法传递一个数组，这个数组的值会覆盖默认的表单值。测试*Public*现在就变得很简单了：
+*createJob()*方法创建一个*Job*对象，然后进行页面跳转（转到*preview*页面）。我们可以给*createJob()*方法传递一个数组，这个数组的值会覆盖默认的表单值。测试*Public*现在就变得很简单了：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -186,7 +186,7 @@ public function testPublishJob()
 }
 ```
 
-测试*Delete*也很类似：
+测试*Delete*操作也很类似：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -211,9 +211,9 @@ public function testDeleteJob()
 
 ## 用测试作保障 ##
 
-当一个*job*被发布之后就不能再对它进行编辑了，尽管*Edit*链接已经不在*preview*页面中显示出来。我们来给它做个测试吧。
+当一条*Job*信息被发布之后就不能再对它进行编辑了，尽管*Edit*链接已经不在*preview*页面中显示出来。我们来给它做个测试吧。
 
-首先我们为*createJob()*方法添加另外一个参数，让*createJob()*方法能够自动发布*job*。添加一个*getJobByPosition()*方法，它能够按指定的*position*返回*job*：
+首先我们为*createJob()*方法添加另外一个参数，让*createJob()*方法能够自动发布*Job*信息。我们来添加一个*getJobByPosition()*方法，它能够按指定的*position*返回*Job*数据：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -260,7 +260,7 @@ public function getJobByPosition($position)
 }
 ```
 
-访问一个已发布*job*的*edit*页面会返回*404*状态码：
+访问一个已发布*Job*信息的*edit*页面会返回**404**状态码：
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/JobControllerTest.php
@@ -275,9 +275,9 @@ public function testEditJob()
 }
 ```
 
-如果你运行一下测试，你不会得到期望的结果，因为我们昨天忘了实现安全性。编写测试同样是一种发现*bug*的好方法，就像你去考虑所有的测试边界值一样。
+如果你运行一下测试，你不会得到期望的结果，因为我们昨天忘了实现安全性。编写测试同样是一种发现*Bug*的好方法，就像你去考虑所有的测试边界值一样。
 
-修改这个*bug*很简单，我们只需为已激活的*job*转向到*404页面*即可：
+修改这个*Bug*很简单，我们只需为已激活的*Job*信息转向到**404页面**即可：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/JobController.php
@@ -303,7 +303,7 @@ public function editAction($token)
 
 ## “穿越未来”的测试 ##
 
-当一个*job*过期天数少于5天，或者*job*已经过期了，用户能够从当前日期开始延期*job*多30天。在浏览器中做这个测试并不容易，因为当一个*job*被创建出来后需要30天才过期，所以当访问这个刚创建的*job*页面时，延期链接是不存在的。当然，你也可以修改数据库中该*job*的过期时间，或者是调整模板让延期链接一直都显示出来，但是这些方法都很乏味而且容易出错。你现在已经可能猜到了，编写测试能够帮助我们解决问题。
+当一条*Job*信息过期天数少于5天，或者*Job*信息已经过期了，用户能够从当前日期开始延期该条*Job*信息多30天。在浏览器中做这个测试并不容易，因为当一个*Job*信息被创建出来后需要30天才过期，所以当访问这个刚创建的*Job*信息页面时，延期链接是不存在的。当然，你也可以修改数据库中该*Job*数据的过期时间，或者是调整模板让延期链接一直都显示出来，但是这些方法都很乏味而且容易出错。你现在已经可能猜到了，编写测试能够帮助我们解决问题。
 
 一如既往，我们需要先为*extend*方法添加新路由：
 
@@ -409,7 +409,7 @@ public function previewAction($token)
 }
 ```
 
-如果*job*已经被*extend*了，那么*Job::extend()*方法返回*true*，否则返回*false*：
+如果*Job*信息已经被*extend*了，那么*Job::extend()*方法返回*true*，否则返回*false*：
 
 ```PHP
 // src/Ibw/JobeetBundle/Entity/Job.php
@@ -471,7 +471,7 @@ public function testExtendJob()
 
 ## 维护任务 ##
 
-尽管Symfony是一个Web框架，但是它也自带了一系列的命令行工具。我们已经使用过它的命令行工具来生成默认的应用程序包（bundle）目录结构和各种各样的*model*文件。在Symfony中添加自定义的命令也很简单。当用户创建了一个*job*之后，用户必须去激活它让它上线，否则的话，久而久之数据库中就会有许多无用的（stale）*job*的数据。我们来自定义一个命令清除数据库中无用的*job*数据。这个命名通常运行在计划任务（cron job）中。
+尽管*Symfony*是一个*Web*框架，但是它也自带了一系列的命令行工具。我们已经使用过它的命令行工具来生成默认的应用程序包（bundle）目录结构和各种各样的*model*文件。在*Symfony*中添加自定义的命令也很简单。当用户创建了一条*Job*信息之后，用户必须去激活它让它上线，否则的话，久而久之数据库中就会有许多无用的（stale）*Job*数据。现在我们来自定义一个命令清除数据库中所有无用的*Job*数据，这个命令通常运行在计划任务（cron job）中。
 
 ```PHP
 // src/Ibw/JobeetBundle/Command/JobeetCleanupCommand.php
@@ -534,7 +534,7 @@ public function cleanup($days)
 
     php app/console ibw:jobeet:cleanup 10
 
-上面命令删除10天前的无用的*job*数据。
+上面命令将删除近10天内数据库中无用的*Job*数据。
 
 # 许可证 #
 
