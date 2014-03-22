@@ -4,7 +4,7 @@
 
 ## 实现程序的安全性 ##
 
-应用程序的安全性是一个两步验证的过程，它的目标是阻止用户访问他/她不应该访问到的资源。实现安全性的第一步是*认证（authentication）*，安全认证系统会取得用户提交的一些标识符，然后通过这个标识符分辨出用户的身份。一旦系统分辨出用户的身份之后，下一步就是系统对用户进行*授权（authorization）*，这一步将决定用户能够访问哪些给定的资源（系统会检查用户是否有权限进行这个操作）。我们可以通过配置*app/config*目录下的*security.yml*文件来对应用程序的安全组件进行配置。为了实现我们应用的安全性，我们修改*scurity.yml*文件：
+应用程序的安全性是一个两步验证的过程，它的目标是阻止用户访问他/她不应该访问到的资源。实现安全性的第一步是**认证（authentication）**，安全认证系统会取得用户提交的一些标识符，然后通过这个标识符分辨出用户的身份。一旦系统分辨出用户的身份之后，下一步就是系统对用户进行**授权（authorization）**操作，这一步将决定用户能够访问哪些给定的资源（系统会检查用户是否有权限进行这个操作）。我们可以通过配置*app/config*目录下的*security.yml*文件来对应用程序的安全组件进行配置。为了实现我们应用的安全性，我们修改*scurity.yml*文件：
 
 ```YAML
 # app/config/security.yml
@@ -39,7 +39,7 @@ security:
         Symfony\Component\Security\Core\User\User: plaintext
 ```
 
-上面的配置会对网站的*/admin*部分（所有以*/admin*作为开头的url）进行安全性保护，并且只有*ROLE_ADMIN*角色的用户才能访问到*/admin*（可以查看*security.yml*中的*access_controller*部分）。在这个例子中，*admin*用户被定义在*security.yml*中（*providers*部分），而且*admin*用户的密码没有被编码（即没有经过加密算法处理过）（*encoders*部分）。对于用户认证，我们需要使用一个传统的登录表单，我们需要去实现它。首先我们需要创建两个路由：一个用来显示登录表单（例如：/login），另一个则用来处理提的交登录表单（例如：/login_check）：
+上面的配置会对网站的*/admin*部分（所有以*/admin*作为开头的url）进行安全性保护，并且只有*ROLE_ADMIN*角色的用户才能访问到*/admin*（可以查看*security.yml*中的*access_controller*部分）。在这个例子中，*admin*用户被定义在*security.yml*中（*providers*部分），而且*admin*用户的密码没有被编码（即没有经过加密算法处理过）（*encoders*部分）。对于用户认证，我们需要使用一个传统的登录表单，我们需要去实现它。首先我们需要创建两个路由：一个用来显示登录表单（例如：*/login*），另一个则用来处理提的交登录表单（例如：*/login_check*）：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing.yml
@@ -89,7 +89,7 @@ class DefaultController extends Controller
 }
 ```
 
-当用户提交了表单，安全系统会自动处理提交的表单。如果用户提交了一个无效的用户名或者密码，那么这个操作就会从系统中读取出提交表单的错误信息，并把这个错误信息反馈给用户。我们的工作仅仅只有显示出一个登录表单和可能出现的登录错误信息，而安全系统则要通过用户提交上来的用户名和密码对用户进行验证。
+当用户提交了表单，安全系统会自动处理提交的表单。如果用户提交了一个无效的用户名或者密码，那么这个操作就会从系统中读取出提交表单的错误信息，并把这个错误信息反馈给用户。我们的工作仅仅只有显示出一个登录表单和可能出现的登录错误信息，而安全系统则会对用户提交上来的用户名和密码进行验证。
 
 最后，我们来创建模板：
 
@@ -110,13 +110,13 @@ class DefaultController extends Controller
 </form>
 ```
 
-现在，如果你去访问<http://jobeet.local/app_dev.php/admin/dashboard> URL，你会看到一个登录表单，你需要输入定义在*security.yml*中的用户名和密码（*admin/adminpass*）才能进入*admin*部分。
+现在，如果我们去访问<http://jobeet.local/app_dev.php/admin/dashboard> URL，我们会看到一个登录表单，我们需要输入定义在*security.yml*中的用户名和密码（*admin/adminpass*）才能进入*admin*部分。
 
 ## User Providers ##
 
-在认证过程中，用户提交了一组登录凭证（通常是用户名和密码）。认证系统的工作就是在用户列表中逐个匹配登录凭证。那么用户列表从何而来呢？
+在认证过程中，用户提交了一组登录凭证（通常是用户名和密码）。认证系统的工作就是在用户数据列表中逐个匹配登录凭证。那么用户数据列表从何而来呢？
 
-在Symfony2中，用户列表可以存放在任何地方，一个配置文件，一个数据库表，一个web service接口，或者其它你能想得到的地方。为认证系统提供一个或者多个用户的类或接口就叫做“*user provider*”。Symfony2 自带了两种最常见的*user provider*：一种是使用配置文件，另一种是使用数据库表。
+在*Symfony2*中，用户数据列表可以存放在任何地方，一个配置文件，一个数据库表，一个web service接口，或者是其它你能想象得到的地方。为认证系统提供一个或者多个用户的类或接口就叫做“*user provider*”。*Symfony2* 自带了两种最常见的*user provider*：一种是使用**配置文件**，另一种是使用**数据库表**。
 
 在上面的例子中，我们把用户列表存放在配置文件里：
 
@@ -284,7 +284,7 @@ class User implements UserInterface
 
 我们同样改变了*encoder*部分，这样就能够使用*sha512*算法对*User*类的*password*属性进行加密了。
 
-所有准备都已经做好了，现在我们需要先创建一个用户。为了做到这点，我们会创建一个新的Symfony命令：
+所有准备都已经做好了，现在我们需要先创建一个用户。为了做到这点，我们会创建一个新的*Symfony*命令：
 
 ```PHP
 // src/Ibw/JobeetBundle/Command/JobeetUsersCommand.php
@@ -335,7 +335,7 @@ class JobeetUsersCommand extends ContainerAwareCommand
 
     php app/console ibw:jobeet:users admin admin
 
-上面的命令会创建一个用户名和密码都是“admin”的用户。你可以使用它登录*admin*部分。
+上面的命令会创建一个用户名和密码都是“admin”的用户。你可以使用它登录并访问到*admin*部分。
 
 ## 登出（Logout） ##
 
@@ -354,7 +354,7 @@ security:
     # ...
 ```
 
-你不需要为*/logout* URL实现控制器，防火墙（firewall）会自行处理。我们来创建*/logout*路由：
+我们不需要为*/logout* URL实现控制器，防火墙（firewall）会自行处理。我们来创建*/logout*路由：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/routing.yml
@@ -375,13 +375,13 @@ logout:
 {% block user_block %}<a href="{{ path('logout') }}">Logout</a>{% endblock%}
 ```
 
-现在，你访问*admin*部分（请先清除缓存），你会被要求填写用户名和密码，进入之后你可以在右上角看到一个*logout*链接。
+现在，当我们访问*admin*部分（请先清除缓存）时，我们会被要求填写用户名和密码，进入之后我们可以在右上角看到一个*logout*链接。
 
-## 用户Session ##
+## 用户*Session* ##
 
-Symfony2提供了一个非常好用的session对象，用户的每个不同请求都可以访问到它里面保存的信息。Symfony2默认是使用原生的PHP session把信息保存到一个cookie中。
+*Symfony2*提供了一个非常好用的*session*对象，用户的每个不同请求都可以访问到它里面保存的信息。*Symfony2*默认是使用原生的*PHP session*把信息保存到一个*cookie*中。
 
-你可以在控制器中方便地取出session里保存的信息：
+我们可以在控制器中方便地取出*session*里保存的信息：
 
 ```PHP
 $session = $this->getRequest()->getSession();
@@ -393,9 +393,9 @@ $session->set('foo', 'bar');
 $foo = $session->get('foo');
 ```
 
-可惜的是，在我们Jobeet的用户stories中（第二天），并没有需要在用户session中保存信息的需求。所以我们来改改需求：为了方便*job*信息的浏览，我们会在菜单栏上显示用户刚刚浏览过的三条*job*信息的链接。
+可惜的是，在我们*Jobeet*的用户*stories*中（第二天的内容），并没有需要在用户*session*中保存信息的需求。所以我们来改改需求：为了方便*Job*信息的浏览，我们会在菜单栏上显示用户刚刚浏览过的三条*Job*信息的链接。
 
-当用户访问一个*job*页面时，那么这个*job*对象会被添加到用户的浏览历史中，并且把它保存到session：
+当用户访问一条*Job*页面时，那么这条*Job*信息对应的*Job*对象就会被添加到用户的浏览历史中，并且把它保存到*session*中：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/JobController.php
@@ -436,7 +436,7 @@ public function showAction($id)
 }
 ```
 
-在*layout*文件的*#content* div标签之前添加下面的代码：
+在*layout*文件的*#content div*标签之前添加下面的代码：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/layout.html.twig -->
@@ -454,13 +454,14 @@ public function showAction($id)
 </div>
  
 <div id="content">
- 
+    ...
+</div>
 <!-- ... -->
 ```
 
-## flash信息 ##
+## *flash*信息 ##
 
-*flash*信息是存放在用户session中的简短信息（通常是用来作为反馈给用户的信息），它通常用在下一个请求中显示信息。它对表单很有用：当你想要重定向并请求一个新页面的同时，显示出一些指定的信息。我们已经在项目的发布*job*需求中使用过*flash*信息了：
+*flash*信息是存放在用户*session*中的简短信息（通常是用来作为反馈给用户的信息），它通常用在下一个请求中显示信息。它对表单很有用：当你想要重定向并请求一个新页面的同时，显示出一些指定的信息。我们已经在项目的发布*Job*信息的需求中使用过*flash*信息了：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/JobController.php
@@ -476,9 +477,9 @@ public function publishAction($token)
 }
 ```
 
-*getFlashBag()->add()*函数的第一个参数是用来标志*flash*的键，第二个参数是需要显示的信息。你可以为*flash*定义任何键名，但*notic*和*error*是最常用的两个。
+*getFlashBag()->add()*函数的第一个参数是用来标志*flash*的键，第二个参数是需要显示的信息。我们可以为*flash*定义任何键名，但*notic*和*error*是最常用的两个。
 
-为了显示*flash*信息，你需要在模板中把它们包含进来。我们已经在*layout.html.twig*中做过了：
+为了显示*flash*信息，我们需要在模板中把它们包含进来。我们已经在*layout.html.twig*中做过了：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/layout.html.twig -->
