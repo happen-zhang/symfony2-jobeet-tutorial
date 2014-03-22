@@ -2,9 +2,9 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-在第十一天中，我们给*Jobeet*添加了一些测试，这个应用程序已经完全能够被求职者（seekers）和职位发布者（posters）使用了。现在是时候考虑我们应用程序的*admin*部分了。今天还好有[Sonata Admin Bundle](http://sonata-project.org/bundles/admin/2-0/doc/index.html)，我们会使用它开发出一个完整*Jobeet*后台管理接口，（这个过程）用不到一个小时。
+在第十一天中，我们给*Jobeet*添加了一些测试，这个应用程序已经完全能够被求职者（seekers）和职位发布者（posters）使用了。现在是时候考虑我们应用程序的*admin*部分了。今天还好有[Sonata Admin Bundle](http://sonata-project.org/bundles/admin/2-0/doc/index.html)的帮助，我们会使用它开发出一个完整*Jobeet*后台管理接口，（这个过程）用不到一个小时。
 
-## 安装Sonata Admin Bundle ##
+## 安装*Sonata Admin Bundle* ##
 
 下载*SonataAdminBundle*和它的依赖到*vendor*目录下：
 
@@ -58,7 +58,7 @@ sonata_block:
         sonata.block.service.rss:
 ```
 
-在*config.yml*中找到*translator*键。如果它被注释掉了，那么请不要注释掉它。
+在*config.yml*中找到*translator*键。如果它被注释掉了，那么请不要注释它。
 
 ```YAML
 # app/config/config.yml
@@ -86,7 +86,7 @@ _sonata_admin:
 # ...
 ```
 
-现在从*bundle*中安装资源：
+现在我们从*bundle*中安装资源：
 
     php app/console assets:install web --symlink
 
@@ -95,11 +95,11 @@ _sonata_admin:
     php app/console cache:clear --env=dev
     php app/console cache:clear --env=prod
 
-现在应该可以通过URL：<http://jobeet.local/app_dev.php/admin/dashboard>访问放到*admin*面板了。
+现在我们应该可以通过URL：<http://jobeet.local/app_dev.php/admin/dashboard>访问放到*admin*面板了。
 
 > 以上的安装需要一步步进行，不然的话可能会报一些Bundle未找到的异常，还有就是目录必须是可写的。可能是SonataAdminBundle更新后的原因，如果在安装过程中遇到需要CoreBundle的问题，那么试着按照提示进行操作，但问题都不大。这里附上一个解决问题的链接：https://github.com/sonata-project/SonataAdminBundle/issues/1832
 
-## CRUD控制器 ##
+## *CRUD*控制器 ##
 
 *CRUD*控制器包含了基础的*CRUD*操作。它是通过控制器名称映射到一个正确的*Admin*类的一个实例。我们可以按照项目的需求来重写任何或者所有的*action*。控制器使用*Admin*类来构造不同的操作。在控制器中可以通过*configuration*属性来访问*Admin*对象。
 
@@ -131,7 +131,7 @@ class JobAdminController extends Controller
 }
 ```
 
-## 创建Admin类 ##
+## 创建*Admin*类 ##
 
 *Admin*类代表的是模型的映射和管理页面（表单，列表，页面显示（show））的部分。为模型创建*Admin*类的最简单方式是去继承*Sonata\AdminBundle\Admin\Admin*类。我们会在*Admin*文件夹中创建*Admin*类。我们先创建*Admin*目录，然后为*Category*创建*Admin*类：
 
@@ -193,13 +193,13 @@ services:
             - 'IbwJobeetBundle:JobAdmin'
 ```
 
-现在你可以在管理面板页看到*Jobeet*分组了，还有*Job*和*Category*模块（modules），它们都有各自的*Add new*和*List*链接。
+现在我们可以在管理面板页看到*Jobeet*分组了，还有*Job*和*Category*模块（modules），它们都有各自的*Add new*和*List*链接。
 
 ![](imgs/12-01.jpg)
 
-## 配置Admin类 ##
+## 配置*Admin*类 ##
 
-如果你去点击*Add new*或者*List*链接，你什么都看不到。那是因为我们还没有为*list*和*form*配置字段。我们来做个基础的配置，先从*Category*开始：
+如果我们去点击*Add new*或者*List*链接，我们什么都看不到。那是因为我们还没有为*list*和*form*配置字段。我们来做个基础的配置，先从*Category*开始：
 
 ```PHP
 // src/Ibw/JobeetBundle/Admin/CategoryAdmin.php
@@ -341,7 +341,7 @@ class JobAdmin extends Admin
 }
 ```
 
-对于*show*操作，我们使用自定义的模板用显示公司的*logo*：
+对于*show*操作，我们使用自定义的模板来显示公司的*logo*属性：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/JobAdmin/list_image.html.twig -->
@@ -351,7 +351,7 @@ class JobAdmin extends Admin
 </tr>
 ```
 
-通过上面的操作，我们为*Job*和*Category*创建了基础的管理模块。你可以发现它们有以下功能：
+通过上面的操作，我们为*Job*和*Category*创建了基础的管理模块。我们可以发现它们有以下功能：
 
 * 列表分页显示
 * 列表可以排序
@@ -363,7 +363,7 @@ class JobAdmin extends Admin
 
 ## 批量操作（Batch Actions） ##
 
-批量操作是对一个被选择的模型对象集合（所有的对象或者只是它们中的一个子集）进行的操作。我们能够方便地为列表页面添加自定义的批量操作。*delete*操作默认就允许你一次删除多个实体。
+批量操作是对一个被选择的模型对象集合（所有的对象或者只是它们中的一个子集）进行的操作。我们能够方便地为列表页面添加自定义的批量操作。*delete*操作默认就允许我们一次删除多个实体。
 
 为了添加新的批量操作，我们需要重写*Admin*类的*getBatchActions()*方法。我们来添加一个批量处理*extend*的操作：
 
@@ -428,7 +428,7 @@ class JobAdminController extends Controller
     }
 ```
 
-我们再来添加一个删除所有在60天内仍未被激活的*job*批量操作。对于这个操作，我们不需要在列表中选择任何的*job*，因为在这个操作的逻辑中会去检索符合条件的记录并删除它们。
+我们再来添加一个批量删除所有在60天内仍未被激活的*Job*数据的操作。对于这个操作，我们不需要在列表中选择任何的*Job*数据，因为在这个操作的逻辑中会去检索符合条件的记录并删除它们。
 
 ```PHP
 // /home/happen/php_pro/jobeet/JobAdmin.php
@@ -456,7 +456,7 @@ public function getBatchActions()
 }
 ```
 
-除了创建*batchActionDeleteNeverActivated*操作外，我们还会创建一个*JobAdminController:: batchActionDeleteNeverActivatedIsRelevant()*方法，这个方法需要得到确认之后才能够执行，以确保用户真的是要进行这个操作（在我们的这个例子中它总是返回true，因为选择需要被删除的*job*逻辑在*JobRepository::cleanup()*方法中）。
+除了创建*batchActionDeleteNeverActivated*操作外，我们还会创建一个*JobAdminController:: batchActionDeleteNeverActivatedIsRelevant()*方法，这个方法需要得到确认之后才能够执行，以确保用户真的是要进行这个操作（在我们的这个例子中它总是返回true，因为选择需要被删除的*Job*数据的逻辑在*JobRepository::cleanup()*方法中）。
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/JobAdminController.php
@@ -486,7 +486,7 @@ public function batchActionDeleteNeverActivated()
 }
 ```
 
-今天我们就先到这了！明天我们来看看怎么样为管理员部分添加用户名（username）和密码（password），同时也会讨论Symfony的安全机制。
+今天我们就先到这了！明天我们来看看怎么样为管理员部分添加用户名（username）和密码（password），同时也会讨论*Symfony*的安全机制。
 
 # 许可证 #
 
