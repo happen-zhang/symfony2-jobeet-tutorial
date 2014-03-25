@@ -2,11 +2,11 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-如果你正在寻找工作，那么你可能十分想要第一时间就能了解到最新发布的*job*信息。我们总不可能每时每刻都守在电脑面前，不断地刷新网站是否发布新的*job*信息吧，那样很不方便，所以我们会为Jobeet用户提供订阅（feeds）功能，这样用户就能实时地接受到最新发布的*job*信息了。
+如果你正在寻找工作，那么你可能十分想要第一时间就能了解到最新发布的*Job*信息。我们总不可能每时每刻都守在电脑面前，不断地刷新网站是否有发布新的*Job*信息吧，那样很不方便，所以我们会为*Jobeet*用户提供订阅（feeds）功能，这样用户就能实时地接受到最新发布的*Job*信息了。
 
 ## 模板格式 ##
 
-模板是能把内容渲染成任意一种格式的通用方式，但我们在大多数情况下都是使用模板来渲染HTML内容。当然，模板也很容易生成Javascript，CSS，XML或者其它任意类型的格式。
+模板是能把内容渲染成任意一种格式的通用方式，但我们在大多数情况下都是使用模板来渲染HTML内容。当然，模板也很容易生成Javascript，CSS，XML或者其它任意类型格式的内容。
 
 我们来举个例子，比如说我们需要把相同的“资源”按照不同的格式渲染出来。为了把一个文章的索引页渲染成XML格式，我们只需简单地把把格式名包含进模板名中即可：
 
@@ -26,7 +26,7 @@ public function indexAction()
 }
 ```
 
-*Request*对象的*getRequestFormat()*方法默认返回的值是html，但它能够基于用户请求的格式返回任意类型的格式。请求格式通常由路由进行管理，路由是可以配置的，所以*/contact*的请求格式是html，而*/contact.xml*的请求格式是xml。
+*Request*对象的*getRequestFormat()*方法默认返回的值是*html*，但它能够基于用户请求的格式返回任意类型的格式。请求格式通常由路由进行管理，路由是可以配置的，所以*/contact*的请求格式是html（因为默认是html格式），而*/contact.xml*的请求格式是xml。
 
 为了创建带有格式参数的链接，我们需要在参数列表中加入*_format*键：
 
@@ -38,9 +38,9 @@ public function indexAction()
 
 ## 订阅 ##
 
-### 订阅最新的job信息 ###
+### 订阅最新的*Job*信息 ###
 
-支持不同格式的内容就像创建模板一样简单。为了给最新job创建一个*Atom*格式的订阅，我们需要创建一个*index.atom.twig*模板：
+支持不同格式的内容就像创建模板一样简单。为了给最新发布的*Job*信息创建一个*Atom*格式的订阅，我们需要创建一个*index.atom.twig*模板：
 
 ```ATOM
 <!-- src/Ibw/JobeetBundle/Resources/views/Job/index.atom.twig -->
@@ -65,7 +65,7 @@ public function indexAction()
 </feed>
 ```
 
-在Jobeet页面的页脚部分更新订阅的链接：
+在*Jobeet*页面的页脚部分更新订阅的链接：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/layout.html.twig -->
@@ -76,7 +76,7 @@ public function indexAction()
 <!-- ... -->
 ```
 
-在*layout*的*<head>*标签部分添加一个*<link>*标签，这让浏览器能够自动发觉我们的订阅链接：
+在*layout*的*<head>*标签部分添加一个*<link>*标签，这让浏览器能够自动察觉到我们的订阅链接：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/layout.html.twig -->
@@ -208,9 +208,9 @@ return $this->render('IbwJobeetBundle:Job:index.'.$format.'.twig', array(
 {% endfor %}
 ```
 
-### 订阅分类中最新的job信息 ###
+### 订阅分类中最新的*Job*信息 ###
 
-Jobeet的目标之一就是帮助人们找到期望的工作，所以我们需要提供不同类型的*job*订阅。
+*Jobeet*的目标之一就是帮助人们找到期望的工作，所以我们需要提供不同类型的*Job*信息订阅。
 
 首先我们来更新模板中分类订阅的链接：
 
