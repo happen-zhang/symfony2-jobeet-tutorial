@@ -2,17 +2,17 @@
 
 *这一系列文章来源于Fabien Potencier，基于Symfony1.4编写的[Jobeet Tutirual](http://symfony.com/legacy/doc/jobeet?orm=Doctrine)。
 
-我们给Jobeet加上了订阅功能之后，用户就可以实时地接收到最新发布的信息了。
+在昨天的内容中，我们给*Jobeet*加上了订阅功能之后，用户就可以实时地接收到最新发布的信息了。
 
-现在我们试着站在发布者的角度来思考，当发布者发布一个*job*信息之后，发布者想要让尽可能多的人能够了解到这条信息。如果我们能把这些信息放在很多小网站上，那么发布者将有更大几率能够找到适合这个工作的人选。这就是所谓的[长尾效应（long tail）](http://en.wikipedia.org/wiki/The_Long_Tail)。*Affiliates*能够在他们的网站上发布最新的*job*信息，这些都需要web services的支持，那么我们今天就来实现web services。
+现在我们试着站在发布者的角度来思考，当发布者发布一个*Job*信息之后，发布者想要让尽可能多的人能够了解到这条信息。如果我们能把这些信息放在很多小网站上，这样一来看的人越多，那么发布者就将有更大几率能够找到适合这个工作的人选了。这就是所谓的[长尾效应（long tail）](http://en.wikipedia.org/wiki/The_Long_Tail)。*Affiliates*能够在他们的网站上发布最新的*Job*信息，这些都需要*web services*的支持，那么我们今天就来实现*web services*。
 
 ## Affiliates ##
 
-就像我们在第二天教程中说的那样，一个*affiliate*能够得到所有当前已激活的*job*列表。
+就像我们在第二天中内容说的那样，一个*Affiliate*能够得到所有当前已激活的*Job*列表。
 
 ### The fixtures ###
 
-我们为*affiliates*创建一个新的*fixture*文件：
+我们为*Affiliates*创建一个新的*Fixture*文件：
 
 ```PHP
 // src/Ibw/JobeetBundle/DataFixtures/ORM/LoadAffiliateData.php
@@ -58,11 +58,11 @@ class LoadAffiliateData extends AbstractFixture implements OrderedFixtureInterfa
 }
 ```
 
-现在运行下面的命令，我们把定义在*fixture*文件中的数据持久化到数据库中：
+现在运行下面的命令，我们把定义在*Fixture*文件中的数据持久化到数据库中：
 
     php app/console doctrine:fixtures:load
 
-在*fixture*文件，我们可以看到*token*是硬编码写上去的，目的是为了方便测试。但当在实际的运行时，如果用户需要申请为*affiliate*时，这个*token*将会被自动生成。我们在*Affiliate*类中创建一个方法来生成*token*。我们先在*ORM*文件中的*lifecycleCallbacks*部分添加*setTokenValue*方法：
+在*Fixture*文件中，我们可以看到*token*是硬编码写上去的，这里的目的是为了方便测试。但当在实际的运行时，当用户需要申请为*Affiliate*时，这个*token*将会被自动生成。我们在*Affiliate*类中创建一个方法来生成*token*。我们先在*ORM*文件中的*lifecycleCallbacks*部分添加*setTokenValue*方法：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/doctrine/Affiliate.orm.yml
@@ -107,7 +107,7 @@ IbwJobeetBundle_api:
         _format: xml|json|yaml
 ```
 
-通常我们修改过路由文件之后，我们都需要去清除cache：
+通常我们修改过路由文件之后，我们都需要去清除*cache*：
 
     php app/console cache:clear --env=dev
     php app/console cache:clear --env=prod
@@ -162,7 +162,7 @@ class ApiController extends Controller
 }
 ```
 
-为了能够通过*token*获得*affiliate*，我们需要创建*getForToken()*方法。这个方法同样会验证*affiliate*是否是已激活的，所以我们这里就不需要再判断*affiliate*是否已激活的。到现在为止我们还尚未使用过*AffiliateRepository*，因为它还不存在。我们现在就来创建它，先修改*ORM*文件：
+为了能够通过*token*获得*Affiliate*的信息，我们需要创建*getForToken()*方法。这个方法同样会验证*Affiliate*是否是已激活的，所以我们这里就不需要再判断*Affiliate*是否已被激活。到现在为止我们还尚未使用过*AffiliateRepository*，因为它还不存在。我们现在就来创建它，先修改*ORM*文件：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/doctrine/Affiliate.orm.yml
@@ -213,7 +213,7 @@ class AffiliateRepository extends EntityRepository
 }
 ```
 
-当通过*token*取出对应的*affiliate*之后，我们会调用*getActiveJobs()*方法返回属于某个分类的所有*job*信息给*affiliate*。如果你打开*JobRepository.php*文件，可以看到*getActiveJobs()*方法没有提供任何的参数选项给*affiliate*使用。为了能够重用这个方法，我们需要对它做一些修改：
+当通过*token*取出对应的*Affiliate*之后，我们会调用*getActiveJobs()*方法返回属于某个分类的所有的*Job*信息给*Affiliate*。如果你打开*JobRepository.php*文件，可以看到*getActiveJobs()*方法没有提供任何的参数选项给*Affiliate*使用。为了能够重用这个方法，我们需要对它做一些修改：
 
 ```PHP
 // src/Ibw/JobeetBundle/Repository/JobRepository.php
@@ -278,7 +278,7 @@ public function asArray($host)
 }
 ```
 
-### XML格式 ###
+### *XML*格式 ###
 
 支持*XML*格式很简单，只需要创建一个模板即可：
 
@@ -296,9 +296,9 @@ public function asArray($host)
 </jobs>
 ```
 
-### JSON格式 ###
+### *JSON*格式 ###
 
-支持JSON格式也是类似的：
+支持*JSON*格式也是类似的：
 
 ```JSON
 // src/Ibw/JobeetBundle/Resources/views/Api/jobs.json.twig
@@ -313,7 +313,7 @@ public function asArray($host)
 {% endfor %}
 ```
 
-### YAML格式 ###
+### *YAML*格式 ###
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/views/Api/jobs.yaml.twig
@@ -325,9 +325,9 @@ public function asArray($host)
 {% endfor %}
 ```
 
-如果你想通过一个无效的*token*来调用web service，那么不论你请求的是什么格式的内容，你都将会得到一个*404*响应。如果你想看到我们努力的成果，你可以试试访问下面的链接：<http://jobeet.local/app_dev.php/api/sensio-labs/jobs.xml>或者是<http://jobeet.local/app_dev.php/api/symfony/jobs.xml>。你可以修改URL中的扩展名来得到指定格式的内容。
+如果你想通过一个无效的*token*来调用*web service*，那么不论你请求的是什么格式的内容，你都将会得到一个**404**响应。如果你想看到我们努力的成果，你可以试试访问下面的链接：<http://jobeet.local/app_dev.php/api/sensio-labs/jobs.xml>或者是<http://jobeet.local/app_dev.php/api/symfony/jobs.xml>。你可以修改*URL*中的扩展名来得到指定格式的内容。
 
-## 测试Web Service ##
+## 测试*Web Service* ##
 
 ```PHP
 // src/Ibw/JobeetBundle/Tests/Controller/ApiControllerTest.php
@@ -438,9 +438,9 @@ class ApiControllerTest extends WebTestCase
 }
 ```
 
-## Affiliate申请表单 ##
+## *Affiliate*申请表单 ##
 
-web service已经可以使用了，现在我们来添加创建*affiliate*的表单吧。为了实现这个功能，我们需要写HTML表单，为每个表单域实现验证规则，把表单域的值处理后保存到数据库中，当表单数据有错误时还需要显示出错误信息反馈给用户。
+*web service*已经可以使用了，现在我们来添加创建*Affiliate*的表单吧。为了实现这个功能，我们需要写HTML表单，为每个表单域实现验证规则，把表单域的值处理后保存到数据库中，当表单数据有错误时还需要显示出错误信息反馈给用户。
 
 首先我们先创建控制器文件，把它命名为*AffiliateCotrolelr*：
 
@@ -570,9 +570,9 @@ Ibw\JobeetBundle\Entity\Affiliate:
             - Email: ~
 ```
 
-在上面的代码中，我们使用了一个新的验证器，叫做*UniqueEntity*。它能够验证Doctrine实体对象中的一个或者多个特殊字段域是否是唯一的。这个十分常用，例如，我们需要防止一个新注册用户的email地址和已存在用户的email地址重复。
+在上面的代码中，我们使用了一个新的验证器，叫做*UniqueEntity*。它能够验证*Doctrine*实体对象中的一个或者多个特殊字段域是否是唯一的。这个十分常用，例如，我们需要防止一个新注册用户的*email*地址和已存在用户的*email*地址重复。
 
-添加了验证约束之后不要忘记清除cache！
+添加了验证约束之后不要忘记清除*cache*！
 
 最后一步需要创建表单试图：
 
@@ -686,7 +686,7 @@ ibw_affiliate_create:
     requirements: { _method: post }
 ```
 
-*affiliate*注册之后，他将会被重定向到等待页面。我们来为定义这个动作或试图吧：
+*Affiliate*注册之后，他将会被重定向到等待页面。我们来为定义这个动作或试图吧：
 
 ```PHP
 // src/Ibw/JobeetBundle/Controller/AffiliateController.php
@@ -728,9 +728,9 @@ ibw_affiliate_wait:
     defaults: { _controller: "IbwJobeetBundle:Affiliate:wait" }
 ```
 
-定义好路由之后，我们需要清除cache。
+定义好路由之后，我们需要清除*cache*。
 
-现在你可以试着点击首页中的*Affiliates*链接，你会跳转到*affiliate*表单页面。
+现在你可以试着点击首页中的*Affiliates*链接，你会跳转到*Affiliate*表单页面。
 
 ### 测试 ###
 
@@ -868,11 +868,11 @@ class AffiliateControllerTest extends WebTestCase
 }
 ```
 
-## Affiliate后台管理 ##
+## *Affiliate*后台管理 ##
 
-对于后台，我们会使用*SonataAdminBundle*。就像我们之前说过的那样，*affiliate*注册之后需要等待*admin*来激活他。所以，当*admin*访问*affiliate*页面后，他只能看到激活或者不激活这两个操作，这样有利于提高工作效率嘛。
+对于后台，我们会使用*SonataAdminBundle*。就像我们之前说过的那样，*Affiliate*注册之后需要等待*admin*来激活他。所以，当*admin*访问*Affiliate*页面后，他只能看到激活或者不激活这两个操作，这样有利于提高工作效率嘛。
 
-首先，你需要在*services.yml*中声明*affiliate*服务：
+首先，你需要在*services.yml*中声明*Affiliate*服务：
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/service.yml
@@ -936,7 +936,7 @@ class AffiliateAdmin extends Admin
 }
 ```
 
-为辅助管理员工作，我们想要只显示出未激活的*affiliate*。我们能够通过过滤*is_active*值为false的*affiliate*来实现这个功能：
+为辅助管理员工作，我们想要只显示出未激活的*Affiliate*。我们能够通过过滤*is_active*值为*false*的*Affiliate*来实现这个功能：
 
 ```PHP
 // src/Ibw/JobeetBundle/Admin/AffiliateAdmin.php
@@ -1165,7 +1165,7 @@ class AffiliateAdminController extends Controller
 }
 ```
 
-现在为新添加的action创建模板：
+现在为新添加的*action*创建模板：
 
 ```HTML
 <!-- src/Ibw/JobeetBundle/Resources/views/AffiliateAdmin/list__action_activate.html.twig -->
@@ -1187,7 +1187,7 @@ class AffiliateAdminController extends Controller
 {% endif %}
 ```
 
-在*AffiliateAdmin::configureListFields()*方法中添加新的action和button后，我们就能在页面上看到每条*affiliate*信息都把它们显示出来：
+在*AffiliateAdmin::configureListFields()*方法中添加新的action和button后，我们就能在页面上看到每条*Affiliate*信息都把它们显示出来：
 
 ```PHP
 // src/Ibw/JobeetBundle/Admin/AffiliateAdmin.php
@@ -1211,9 +1211,9 @@ class AffiliateAdmin extends Admin
 }
 ```
 
-好的，马上清除掉cache来试试吧！
+好的，马上清除掉*cache*来试试吧！
 
-今天我们就到这了，明天我们会讲解发送邮件，当*affiliate*被激活后将收到一封邮件。
+今天我们就到这了，明天我们会讲解发送邮件，当*Affiliate*被激活后将收到一封邮件。
 
 # 许可证 #
 
