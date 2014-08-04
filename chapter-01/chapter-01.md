@@ -70,7 +70,7 @@
 
     sudo nano /etc/apache2/sites-available/jobeet.local
 
-好了，我们创建了一个*jobeet.local*文件。接下来，把下面的代码复制到*jobeet.local*文件中，然后按下*Control-O*，回车进行保存，然后*Control-X*退出编辑器。
+好了，我们创建了一个*jobeet.local*文件。接下来，把下面的代码复制到*jobeet.local.config*文件中，然后按下*Control-O*，回车进行保存，然后*Control-X*退出编辑器。
 
     <VirtualHost *:80>
         ServerName jobeet.local
