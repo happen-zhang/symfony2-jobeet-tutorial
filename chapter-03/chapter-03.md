@@ -34,7 +34,7 @@ parameters:
 
 ## 模式 ##
 
-为了让*Doctrine*能够“了解“我们的对象，我们需要创建“元数据”文件来描述对象在数据库中存放时对应的字段域。我们先在*src/Ibw/JobeetBundle/Resources/config*目录下创建一个*doctrine*目录。*doctribe/*目录下会包含三个文件：*Category.orm.yml*，*Job.orm.yml*和*Affiliate.orm.yml*。
+为了让*Doctrine*能够“了解“我们的对象，我们需要创建“元数据”文件来描述对象在数据库中存放时对应的字段域。我们先在*src/Ibw/JobeetBundle/Resources/config*目录下创建一个*doctrine*目录。*doctrine/*目录下会包含三个文件：*Category.orm.yml*，*Job.orm.yml*和*Affiliate.orm.yml*。
 
 ```YAML
 # src/Ibw/JobeetBundle/Resources/config/doctrine/Category.orm.yml
