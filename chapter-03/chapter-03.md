@@ -155,6 +155,7 @@ Ibw\JobeetBundle\Entity\Affiliate:
     manyToMany:
         categories:
             targetEntity: Category
+            inversedBy: affiliates
             joinTable:
                 name: category_affiliate
                 joinColumns:
