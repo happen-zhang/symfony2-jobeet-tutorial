@@ -378,9 +378,9 @@ class Job
      */
     public function removeUpload()
     {
-        if(file_exists($file)) {
-            if ($file = $this->getAbsolutePath()) {
-                unlink($file);
+        if(file_exists($this->file)) {
+            if ($this->file = $this->getAbsolutePath()) {
+                unlink($this->file);
             }
         }    
     }
