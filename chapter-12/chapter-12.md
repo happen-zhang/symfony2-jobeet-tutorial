@@ -398,6 +398,7 @@ namespace Ibw\JobeetBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery as ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  
 class JobAdminController extends Controller
 {
@@ -426,6 +427,7 @@ class JobAdminController extends Controller
  
         return new RedirectResponse($this->admin->generateUrl('list',$this->admin->getFilterParameters()));
     }
+}
 ```
 
 我们再来添加一个批量删除所有在60天内仍未被激活的*Job*数据的操作。对于这个操作，我们不需要在列表中选择任何的*Job*数据，因为在这个操作的逻辑中会去检索符合条件的记录并删除它们。
